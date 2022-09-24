@@ -28,9 +28,15 @@ function App() {
         mapStyle="mapbox://styles/mapbox/satellite-streets-v11"
         onViewportChange={(nextViewport) => setViewport(nextViewport)}
       >
+<<<<<<< HEAD
       <Marker
       longitude={-97.4}
       latitude={38}
+=======
+      <Marker 
+      longitude={-97.4} 
+      latitude={38} 
+>>>>>>> 1daa875cbf2b802d9891b235a7db33e9e706f42c
       offsetLeft={-20}
       offsetTop={-10}
       >
