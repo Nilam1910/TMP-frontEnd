@@ -1,7 +1,7 @@
 import './App.css';
 import React, { Component } from 'react'
 import {useState} from 'react';
-import Map from 'react-map-gl';
+import Map, {Marker} from 'react-map-gl';
 
 let baseURL = ""
 if(process.env.NODE_ENV === "development"){
@@ -24,10 +24,14 @@ function App() {
         initialViewState={{ ...viewport }}
         mapboxAccessToken={process.env.REACT_APP_MAPBOX}
         transitionDuration="200"
-         style={{ width: "100vw", height: "100vh" }}
+        style={{ width: "100vw", height: "100vh" }}
         mapStyle="mapbox://styles/mapbox/satellite-streets-v11"
         onViewportChange={(nextViewport) => setViewport(nextViewport)}
-      />
+      >
+      <Marker longitude={-122} latitude={38} >
+      <img src="./pin.png" />
+     </Marker>
+      </Map>
   );
 }
 
