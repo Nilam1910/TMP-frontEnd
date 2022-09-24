@@ -28,8 +28,12 @@ function App() {
         mapStyle="mapbox://styles/mapbox/satellite-streets-v11"
         onViewportChange={(nextViewport) => setViewport(nextViewport)}
       >
-      <Marker longitude={-122} latitude={38} >
-      <img src="./pin.png" />
+      <Marker 
+      longitude={-97.4} 
+      latitude={38} 
+      offsetLeft={-20}
+      offsetTop={-10}
+      >
      </Marker>
       </Map>
   );
