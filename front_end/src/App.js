@@ -19,7 +19,7 @@ function App() {
     latitude: 39.38,
     zoom: 4
   })
-  return (
+  return ( 
     <Map
         initialViewState={{ ...viewport }}
         mapboxAccessToken={process.env.REACT_APP_MAPBOX}
@@ -29,10 +29,11 @@ function App() {
         onViewportChange={(nextViewport) => setViewport(nextViewport)}
       >
       <Marker longitude={-122} latitude={38} >
-      <img src="./pin.png" />
+      
      </Marker>
       </Map>
-  );
+   
+  )
 }
 
 export default App
