@@ -32,10 +32,10 @@ function App() {
       <Marker
       longitude={-97.4}
       latitude={38}
-      offsetLeft={-20}
-      offsetTop={-10}
+      offsetLeft={-3.5 * viewport.zoom}
+      offsetTop={-10 * viewport.zoom}
       >
-      <Room />
+      <Room style={{fontSize:viewport.zoom * 10}}/>
      </Marker>
       </Map>
   );
