@@ -2,6 +2,7 @@ import './App.css';
 import React, { Component } from 'react'
 import {useState} from 'react';
 import Map, {Marker} from 'react-map-gl';
+import Room from '@mui/icons-material/Room';
 
 let baseURL = ""
 if(process.env.NODE_ENV === "development"){
@@ -34,6 +35,7 @@ function App() {
       offsetLeft={-20}
       offsetTop={-10}
       >
+      <Room />
      </Marker>
       </Map>
   );
