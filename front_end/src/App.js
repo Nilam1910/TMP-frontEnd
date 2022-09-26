@@ -1,9 +1,11 @@
+  // const [showPopup, setShowPopup] = React.useState(true);
 import './App.css';
-import React, { Component } from 'react'
+import React, { Component, useEffect } from 'react'
 import {useState} from 'react';
 import Map, {Marker, Popup} from 'react-map-gl';
 import {Room, Star }from '@material-ui/icons';
-// Changed how we imported the icons
+// import { formatMs } from '@material-ui/core';
+// import {format} from "timeago.js"
 
 
 let baseURL = ""
@@ -16,6 +18,7 @@ console.log("Current base URL: ", baseURL)
 
 function App() {
   const [showPopup, setShowPopup] = React.useState(true);
+  const [pins,setPins] = useState([])
   const [viewport, setViewport] = useState({
     width: "100%",
     height: "100%",
@@ -23,6 +26,18 @@ function App() {
     latitude: 39.38,
     zoom: 4
   });
+
+  useEffect(() => {
+    const getPins = async ()=>{
+      try{
+        const res = await fetch(this.state.get("/pins"))
+        setPins(res.data)
+      }catch(err){
+        console.log(err)
+      }
+    }
+    getPins()
+  }, [])
 
   return (
     <div style={{ height: "100vh", width: "100%"}}>
@@ -35,10 +50,11 @@ function App() {
           mapStyle="mapbox://styles/mapbox/streets-v9"
           onViewportChange={(Viewport) => setViewport(viewport)}
         >
+        {pins.map(p=>(
         <>
           <Marker
-          longitude={-97.4}
-          latitude={38}
+          longitude={p.lat}
+          latitude={p.long}
           offsetLeft={-3.5 * viewport.zoom}
           offsetTop={-10 * viewport.zoom}
           >
@@ -47,17 +63,17 @@ function App() {
 
         {showPopup && (
          <Popup
-         longitude={-97.4}
-         latitude={38}
+         longitude={p.lat}
+         latitude={p.long}
          closeButton={true}
          closeOnClick={false}
          anchor="top"
          >
           <div className ="card">
             <label> Place </label>
-            <h4 className="place"> Manhattan </h4>
+            <h2 className="place">{p.title}</h2>
             <label> Review </label>
-            <p className="desc"> I love central park!</p>
+            <p className="desc">{p.dsc}</p>
             <label> Rating </label>
             <div className="stars">
             <Star className="star" />
@@ -67,13 +83,13 @@ function App() {
             <Star className="star" />
             </div>
             <label> Information</label>
-            <span className="username"> Created by <b> Tony </b></span>
-            <span className="date"> 1 hour ago </span>
+            <span className="username"> Created by <b>{p.username}</b></span>
+            <span className="date">{p.createdAt}</span>
 
           </div>
           </Popup>)}
         </>
-
+      ))}
         </Map>
       </div>
   );
