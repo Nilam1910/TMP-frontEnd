@@ -3,6 +3,9 @@ import React, { useEffect } from 'react'
 import {useState} from 'react';
 import Map, {Marker, Popup} from 'react-map-gl';
 import {Room, Star }from '@material-ui/icons';
+// import { formatMs } from '@material-ui/core';
+import {format} from "timeago.js"
+
 
 
 let baseURL = ""
@@ -58,7 +61,6 @@ function App() {
         <Room style={{fontSize:viewport.zoom * 10, color: "slateblue"}}/>
         </Marker>
      
-    
      <Popup 
      longitude={p.lat} 
      latitude={p.long}
@@ -81,7 +83,7 @@ function App() {
         </div>
         <label> Information</label>
         <span className="username"> Created by <b>{p.username}</b></span>
-        <span className="date"> 1 hour ago </span>
+        <span className="date">{format(p.createdAt)}</span>
       </div>
       </Popup>
       </>
