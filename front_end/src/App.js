@@ -53,8 +53,8 @@ function App() {
         {pins.map(p=>(
         <>
           <Marker
-          longitude={p.lat}
-          latitude={p.long}
+          longitude={p.longitude}
+          latitude={p.latitude}
           offsetLeft={-3.5 * viewport.zoom}
           offsetTop={-10 * viewport.zoom}
           >
@@ -63,8 +63,8 @@ function App() {
 
         {showPopup && (
          <Popup
-         longitude={p.lat}
-         latitude={p.long}
+         longitude={p.longitude}
+         latitude={p.latitude}
          closeButton={true}
          closeOnClick={false}
          anchor="top"
@@ -73,7 +73,7 @@ function App() {
             <label> Place </label>
             <h2 className="place">{p.title}</h2>
             <label> Review </label>
-            <p className="desc">{p.dsc}</p>
+            <p className="desc">{p.description}</p>
             <label> Rating </label>
             <div className="stars">
             <Star className="star" />
@@ -84,10 +84,11 @@ function App() {
             </div>
             <label> Information</label>
             <span className="username"> Created by <b>{p.username}</b></span>
-            <span className="date">{p.createdAt}</span>
+            <span className="date">{format(p.createdAt)}</span>
 
           </div>
-          </Popup>)}
+          </Popup>
+        )}
         </>
       ))}
         </Map>
