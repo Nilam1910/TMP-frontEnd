@@ -1,16 +1,37 @@
 .App {
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.card {
+  width: max-content;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+ 
+}
+.card:hover{
+  background-color: rgba(152, 209, 231, 0.916);
+  
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+label{  
+  width: max-content;
+  color: blueviolet;
+  font-size: 14px;
+  font-weight: bold;
+  border-bottom: 2.5px solid rgb(194, 23, 200);
+  margin: .5px 0;
+  
+}
+
+.desc{  
+  font-size: 14px;
+}
+.star{
+  color: gold
+}
+.date{
+  font-size: 14px;
 }
 
 .App-header {
@@ -24,15 +45,6 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+
+
