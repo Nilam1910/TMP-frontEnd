@@ -1,32 +1,47 @@
+App {
+  text-align: center;
+}
+
 .card {
-  width: 250px;
-  height: 250px;
+  width: max-content;
+  height: max-content;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
 
-.desc {
-  font-size: 14px;
+.card:hover{
+  background-color: rgba(152, 209, 231, 0.916);
 }
 
-.star {
-  color: gold;
-}
-
-.username {
-  font-size: 14px;
-}
-
-.date {
-  font-size: 14px;
-}
-
-
-label {
+label{
   width: max-content;
-  color: tomato;
-  font-size: 13px;
-  border-bottom: 1px solid tomato;
-  margin: 3px 0;
+  color: blueviolet;
+  font-size: 14px;
+  font-weight: bold;
+  border-bottom: 2.5px solid rgb(194, 23, 200);
+  margin: .5px 0;
+}
+
+.desc{
+  font-size: 14px;
+}
+
+.star{
+  color: gold
+}
+
+.date{
+  font-size: 14px;
+}
+
+.App-header {
+  background-color: #282C34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
 }
