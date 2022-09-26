@@ -1,11 +1,10 @@
   // const [showPopup, setShowPopup] = React.useState(true);
 import './App.css';
-import React, { Component, useEffect } from 'react'
-import {useState} from 'react';
+import React, { Component, useEffect, useState } from 'react'
 import Map, {Marker, Popup} from 'react-map-gl';
 import {Room, Star }from '@material-ui/icons';
-// import { formatMs } from '@material-ui/core';
-// import {format} from "timeago.js"
+import { formatMs } from '@material-ui/core';
+import { format } from 'timeago.js';
 
 
 let baseURL = ""
@@ -17,8 +16,16 @@ if(process.env.NODE_ENV === "development"){
 console.log("Current base URL: ", baseURL)
 
 function App() {
+  const currentUser =""
+  const myStorage = window.localStorage;
+  const [currentUsername, setCurrentUsername] = useState(myStorage.getItem("user"));
   const [showPopup, setShowPopup] = React.useState(true);
-  const [pins,setPins] = useState([])
+  const [currentPlaceId, setCurrentPlaceId] = useState(null);
+  const [newPlace, setnewPlace] = useState(null);
+  const [title, setTitle] = useState(null);
+  const [description, setDescription] = useState(null);
+  const [rating, setRating] = useState(0);
+  const [pins, setPins] = useState([]);
   const [viewport, setViewport] = useState({
     width: "100%",
     height: "100%",
@@ -37,7 +44,40 @@ function App() {
       }
     }
     getPins()
-  }, [])
+  }, []);
+
+  const handleMarkerClick = (id, latitude, longitude) => {
+    setCurrentPlaceId(id);
+    setViewport({...viewport, latitude:latitude, longitude:longitude})
+  }
+
+  const handleAddClick = (e) => {
+    const [longitude, latitude] = e.lnglat
+    setnewPlace({
+      latitude,
+      longitude,
+    })
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const newPin = {
+      username: currentUsername,
+      title,
+      description,
+      rating,
+      latitude: newPlace.latitude,
+      longitude: newPlace.longitude,
+    }
+
+    try {
+      const res = await fetch.post(this.state.get("/pins", newPin));
+      setPins([...pins, res.data]);
+      setnewPlace(null);
+    } catch(err){
+      console.log(err)
+    }
+  }
 
   return (
     <div style={{ height: "100vh", width: "100%"}}>
@@ -49,25 +89,30 @@ function App() {
           transitionDuration="200"
           mapStyle="mapbox://styles/mapbox/streets-v9"
           onViewportChange={(Viewport) => setViewport(viewport)}
+          onDblClick = {handleAddClick}
         >
-        {pins.map(p=>(
+        {pins.map((p) =>(
         <>
           <Marker
           longitude={p.longitude}
           latitude={p.latitude}
           offsetLeft={-3.5 * viewport.zoom}
-          offsetTop={-10 * viewport.zoom}
+          offsetTop={-7 * viewport.zoom}
           >
-          <Room style={{fontSize:viewport.zoom * 10, color: "slateblue"}}/>
+          <Room
+          style={{fontSize:viewport.zoom * 10, color: currentUsername === p.username ?"tomato" : "slateblue", cursor: "pointer"}}
+          onClick={()=>handleMarkerClick(p._id, p.latitude, p.longitude)}
+          />
          </Marker>
 
-        {showPopup && (
+        {p._id === currentPlaceId && (
          <Popup
          longitude={p.longitude}
          latitude={p.latitude}
          closeButton={true}
          closeOnClick={false}
-         anchor="top"
+         anchor="left"
+         onClose={()=>setCurrentPlaceId(null)}
          >
           <div className ="card">
             <label> Place </label>
@@ -76,11 +121,7 @@ function App() {
             <p className="desc">{p.description}</p>
             <label> Rating </label>
             <div className="stars">
-            <Star className="star" />
-            <Star className="star" />
-            <Star className="star" />
-            <Star className="star" />
-            <Star className="star" />
+              {Array(p.rating).fill(<Star className="star" />)}
             </div>
             <label> Information</label>
             <span className="username"> Created by <b>{p.username}</b></span>
@@ -91,6 +132,40 @@ function App() {
         )}
         </>
       ))}
+      {newPlace && (
+      <Popup
+        longitude={newPlace.longitude}
+        latitude={newPlace.latitude}
+        closeButton={true}
+        closeOnClick={false}
+        anchor="left"
+        onClose={()=>setnewPlace(null)}
+        >
+        <div>
+          <form onSubmit={handleSubmit}>
+            <label>Title</label>
+            <input
+              placeholder="enter a title"
+              onChange={(e) =>setTitle(e.target.value)}
+            />
+            <label>Review</label>
+            <textarea
+              placeholder="Tell us about your trip"
+              onChange={(e) =>setDescription(e.target.value)}
+            />
+            <label>Rating</label>
+            <select onChange={(e) =>setRating(e.target.value)}>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+            <button className="submitButton" type="submit">AddPin</button>
+          </form>
+        </div>
+      </Popup>
+       )}
         </Map>
       </div>
   );
