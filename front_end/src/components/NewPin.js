@@ -21,6 +21,7 @@ class NewPin extends Component {
         }).then (res => res.json())
         .then (resJson => {
           console.log("NewPin - resJson", resJson) 
+          this.props.handleAddPin(resJson)
           this.setState({username: ""}) // to go back on
         })
     }
@@ -38,10 +39,11 @@ class NewPin extends Component {
               placeholder="add a pin"
           />
             <input type="submit" value="Add a reason to Visit" />
+          
         </form>   
       </>
     )
   }
 }
-
+// creating the a things the database going to send a things back to us amd now that it exists in the database so i we have to pass it to the app an the app will take a responsibility of updating state to do that we need mechanism for app to take on the responsibility
 export default NewPin

@@ -51,6 +51,11 @@ class App extends Component {
       viewport: { ...this.state.viewport, ...viewport }
     });
   };
+  handleAddPin = (pin) => {
+    const copyPins = [...this.state.pins]
+    copyPins.unshift(pin)
+    this.setState({pins: copyPins})
+  }
   render(){
     const { viewport } = this.state;
     return (
@@ -64,7 +69,7 @@ class App extends Component {
             mapStyle="mapbox://styles/mapbox/streets-v9"
             onViewportChange={this.handleViewportChange}
           >
-            <NewPin />
+            <NewPin handleAddPin={this.handleAddPin}/>
           {this.state.pins.map((pins, i) => {
             return (
               <>
