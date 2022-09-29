@@ -2,7 +2,7 @@ import './App.css';
 import React, { Component, useEffect, useState } from 'react'
 import Map, {Marker, Popup} from 'react-map-gl';
 import {Room, Star }from '@material-ui/icons';
-// import { format } from 'timeago.js';
+import { format } from 'timeago.js';
 
 
 let baseURL = ""
@@ -26,6 +26,8 @@ class App extends Component {
           latitude: 39.38,
           zoom: 4
         },
+        currentPlaceId: null,
+        setCurrentPlaceId: null,
 			}
 	}
   // componentDidMount - runs only once when the comp is mounted for the first time
@@ -50,8 +52,16 @@ class App extends Component {
   handleViewportChange = viewport => {
     this.setState({
       viewport: { ...this.state.viewport, ...viewport }
-    });
-  };
+    })
+  }
+
+  handleMarkerClick = (id, viewport, latitude, longitude) => {
+    this.setState.setCurrentPlaceId(id)
+    this.setState({
+      viewport: {  ...this.state.viewport, ...viewport, latitude: latitude, longitude: longitude }
+    })
+  }
+
   render(){
     const { viewport } = this.state;
     return (
@@ -74,10 +84,38 @@ class App extends Component {
                   offsetLeft={-viewport.zoom * 5}
                   offsetTop={-viewport.zoom * 10}
                 >
-                  <Room style={{fontSize:viewport.zoom * 10, color: "slateblue"}}/>
+                  <Room style={{fontSize:viewport.zoom * 10, color: "slateblue", cursor: "pointer"}}
+                    onClick={() => this.handleMarkerClick(pins._id, pins.latitude, pins.longitude)}
+                  />
                 </Marker>
-
-            </>
+                {pins._id === this.state.currentPlaceId && (
+                <Popup
+                 longitude={pins.longitude}
+                 latitude={pins.latitude}
+                 closeButton={true}
+                 closeOnClick={false}
+                 anchor="left"
+                 >
+                  <div className ="card">
+                    <label> Place </label>
+                    <h4 className="place"> {pins.title} </h4>
+                    <label> Review </label>
+                    <p className="desc"> {pins.description}</p>
+                    <label> Rating </label>
+                    <div className="stars">
+                    <Star className="star" />
+                    <Star className="star" />
+                    <Star className="star" />
+                    <Star className="star" />
+                    <Star className="star" />
+                    </div>
+                    <label> Information</label>
+                    <span className="username"> Created by <b> {pins.username}</b></span>
+                    <span className="date"> {format(pins.createdAt)} </span>
+                  </div>
+                </Popup>
+              )}
+              </>
         )
       })}
           </Map>
