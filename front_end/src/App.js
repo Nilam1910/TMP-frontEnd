@@ -3,6 +3,7 @@ import React, { Component, useEffect, useState } from 'react'
 import Map, {Marker, Popup} from 'react-map-gl';
 import {Room, Star }from '@material-ui/icons';
 // import { format } from 'timeago.js';
+import NewPin from "./components/NewPin"
 
 
 let baseURL = ""
@@ -32,7 +33,6 @@ class App extends Component {
 	componentDidMount() {
 		this.getPins()
 	}
-
   getPins = () => {
 		fetch(baseURL + '/pins')
 			.then(res => {
@@ -46,7 +46,6 @@ class App extends Component {
 				this.setState({pins: data.pins})
 			})
 	}
-
   handleViewportChange = viewport => {
     this.setState({
       viewport: { ...this.state.viewport, ...viewport }
@@ -65,6 +64,7 @@ class App extends Component {
             mapStyle="mapbox://styles/mapbox/streets-v9"
             onViewportChange={this.handleViewportChange}
           >
+            <NewPin />
           {this.state.pins.map((pins, i) => {
             return (
               <>
@@ -74,12 +74,14 @@ class App extends Component {
                   offsetLeft={-viewport.zoom * 5}
                   offsetTop={-viewport.zoom * 10}
                 >
-                  <Room style={{fontSize:viewport.zoom * 10, color: "slateblue"}}/>
                 </Marker>
-
-            </>
-        )
-      })}
+                  <Room style={{fontSize:viewport.zoom * 10, color: "slateblue"}}/>
+                  <tr key = {pins._id}>
+                    <td>{pins.name}</td>
+                  </tr>
+              </>
+          )
+        })}
           </Map>
         </div>
     );
