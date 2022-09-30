@@ -26,8 +26,7 @@ class App extends Component {
           latitude: 39.38,
           zoom: 4
         },
-        currentPlaceId: null,
-        setCurrentPlaceId: null,
+        showPopup: false
 			}
 	}
   // componentDidMount - runs only once when the comp is mounted for the first time
@@ -55,10 +54,10 @@ class App extends Component {
     })
   }
 
-  handleMarkerClick = (id, viewport, latitude, longitude) => {
-    this.setState.setCurrentPlaceId(id)
+  handlePopUp = () => {
+    console.log("handle popup triggered")
     this.setState({
-      viewport: {  ...this.state.viewport, ...viewport, latitude: latitude, longitude: longitude }
+      showPopup: true
     })
   }
 
@@ -75,25 +74,29 @@ class App extends Component {
             mapStyle="mapbox://styles/mapbox/streets-v9"
             onViewportChange={this.handleViewportChange}
           >
-          {this.state.pins.map((pins, i) => {
+          {this.state.pins.map((pins, index) => {
+            // console.log(pins)
             return (
               <>
                 <Marker
+                  key={pins._id}
                   longitude={pins.longitude}
                   latitude={pins.latitude}
                   offsetLeft={-viewport.zoom * 5}
                   offsetTop={-viewport.zoom * 10}
+                  onClick={this.handlePopUp}
                 >
-                  <Room style={{fontSize:viewport.zoom * 10, color: "slateblue", cursor: "pointer"}}
-                    onClick={() => this.handleMarkerClick(pins._id, pins.latitude, pins.longitude)}
-                  />
                 </Marker>
-                {pins._id === this.state.currentPlaceId && (
+                // {console.log("showpopup", this.state.showPopup)}
+                {pins._id && this.state.showPopup === true && (
                 <Popup
                  longitude={pins.longitude}
                  latitude={pins.latitude}
                  closeButton={true}
                  closeOnClick={false}
+                 onClose={() => this.setState({
+                   showPopup: false
+                 })}
                  anchor="left"
                  >
                   <div className ="card">
