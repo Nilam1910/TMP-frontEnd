@@ -26,7 +26,8 @@ class App extends Component {
           latitude: 39.38,
           zoom: 4
         },
-        showPopup: false
+        showPopup: false,
+        currentLocation: null,
 			}
 	}
   // componentDidMount - runs only once when the comp is mounted for the first time
@@ -54,12 +55,20 @@ class App extends Component {
     })
   }
 
-  handlePopUp = () => {
+  handlePopUp = (id) => {
     console.log("handle popup triggered")
     this.setState({
-      showPopup: true
+      currentLocation: id
     })
   }
+
+  handlePopUpTwo = () => {
+    console.log("handle popup triggered")
+    this.setState({
+      currentLocation: null
+    })
+  }
+
 
   render(){
     const { viewport } = this.state;
@@ -72,31 +81,28 @@ class App extends Component {
             height="100%"
             transitionDuration="200"
             mapStyle="mapbox://styles/mapbox/streets-v9"
-            onViewportChange={this.handleViewportChange}
+            onViewportChange={() => this.handleViewportChange()}
           >
           {this.state.pins.map((pins, index) => {
             // console.log(pins)
             return (
-              <>
+              <div key={pins._id}>
                 <Marker
-                  key={pins._id}
                   longitude={pins.longitude}
                   latitude={pins.latitude}
                   offsetLeft={-viewport.zoom * 5}
                   offsetTop={-viewport.zoom * 10}
-                  onClick={this.handlePopUp}
+                  onClick={() => this.handlePopUp(pins._id)}
                 >
                 </Marker>
                 // {console.log("showpopup", this.state.showPopup)}
-                {pins._id && this.state.showPopup === true && (
+                {pins._id === this.state.currentLocation && (
                 <Popup
                  longitude={pins.longitude}
                  latitude={pins.latitude}
                  closeButton={true}
                  closeOnClick={false}
-                 onClose={() => this.setState({
-                   showPopup: false
-                 })}
+                 onClose={() => this.handlePopUpTwo()}
                  anchor="left"
                  >
                   <div className ="card">
@@ -118,7 +124,7 @@ class App extends Component {
                   </div>
                 </Popup>
               )}
-              </>
+              </div>
         )
       })}
           </Map>
