@@ -26,7 +26,8 @@ class App extends Component {
           longitude: -97.92,
           latitude: 39.38,
           zoom: 4
-        },currentLocation: null,
+        },
+        currentLocation: null,
 			}
 	}
   
@@ -56,12 +57,16 @@ class App extends Component {
       viewport: { ...this.state.viewport, ...viewport }
     });
   };
+
   handleAddPin = (pin) => {
     const copyPins = [...this.state.pins]
     copyPins.unshift(pin)
     this.setState({pins: copyPins})
   }
  
+    })
+  }
+
   handlePopUp = (id) => {
     console.log("handle popup triggered")
     this.setState({
@@ -75,6 +80,7 @@ class App extends Component {
       currentLocation: null
     })
   }
+
   render(){
     const { viewport } = this.state;
     return (
@@ -86,12 +92,16 @@ class App extends Component {
             height="100%"
             transitionDuration="200"
             mapStyle="mapbox://styles/mapbox/streets-v9"
-            onViewportChange={this.handleViewportChange}
+            onViewportChange={() => this.handleViewportChange()}
           >
+
             {/* <NewPin handleAddPin={this.handleAddPin}/> */}
-          {this.state.pins.map((pins, i) => {
+
+          {this.state.pins.map((pins, index) => {
+            // console.log(pins)
+
             return (
-              <>
+              <div key={pins._id}>
                 <Marker
                   key={pins._id}
                   longitude={pins.longitude}
@@ -99,6 +109,7 @@ class App extends Component {
                   offsetLeft={-viewport.zoom * 5}
                   offsetTop={-viewport.zoom * 10}
                   onClick={() => this.handlePopUp(pins._id)}
+
                   >
                   <Room 
                   style={{fontSize:viewport.zoom * 10,
@@ -149,6 +160,7 @@ class App extends Component {
           )
         })}
         <NewPin handleAddPin={this.handleAddPin}/> 
+                
           </Map>
         </div>
     );
