@@ -72,3 +72,26 @@ input::placeholder, textarea::placeholder {
   background-color: tomato;
   cursor: pointer;
 }
+form {
+  width: 250px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+input {
+  border: none;
+  border-bottom: 1px solid gray;
+}
+input::placeholder, textarea::placeholder {
+  font-size: 12px;
+  color: rgb(172, 198, 198);
+}
+.submitButton {
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+  background-color: tomato;
+  cursor: pointer;
+}

@@ -3,10 +3,10 @@ import React, { Component } from 'react'
 class NewPin extends Component {
    constructor(props) {
      super(props)
-     this.state = {name: ""}
+     this.state = {username: ""}
    }
    // call this function on every keystroke (every creation)
-   handleChange = (e) => {this.setState({name: e.target.value})}
+   handleChange = (e) => {this.setState({username: e.target.value})}
 
    componentsDidMount(){ // this one use to check the handleSubmit is working // only oneTime
      this.handleSubmit() // we don't need to use fat arrow because its already bind that level of component // or because its called from this component like handleSubmit
