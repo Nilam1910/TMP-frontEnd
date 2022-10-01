@@ -69,3 +69,7 @@ input::placeholder, textarea::placeholder {
   background-color: tomato;
   cursor: pointer;
 }
+
+.pin {
+  cursor: pointer;  
+}
