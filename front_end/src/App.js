@@ -55,6 +55,11 @@ class App extends Component {
     })
   }
 
+
+  // handlePopupThree = (id) => {
+  //   currentlocation(id)
+  // }
+
   handlePopUp = (id) => {
     console.log("handle popup triggered")
     this.setState({
