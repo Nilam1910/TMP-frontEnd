@@ -3,6 +3,7 @@ import React, { Component, useEffect, useState } from 'react'
 import Map, {Marker, Popup} from 'react-map-gl';
 import {Room, Star }from '@material-ui/icons';
 import { format } from 'timeago.js';
+import Register from "./components/Register"
 
 
 let baseURL = ""
@@ -15,8 +16,8 @@ if(process.env.NODE_ENV === "development"){
 console.log("Current base URL: ", baseURL)
 
 class App extends Component {
-  constructor(props){
-		super(props)
+  constructor(){
+		super()
 			this.state = {
 				pins: [],
         viewport: {
@@ -28,7 +29,15 @@ class App extends Component {
         },
         showPopup: false,
         currentLocation: null,
+        showRegister: false,
+        newPlace: null,
+        setNewPlace: null,
+        name: "",
+        title: "",
+        description: "",
+        rating:parseInt(""),
 			}
+      this.closeRegisterPopup = this.closeRegisterPopup.bind(this)
 	}
   // componentDidMount - runs only once when the comp is mounted for the first time
 	componentDidMount() {
@@ -74,6 +83,89 @@ class App extends Component {
     })
   }
 
+  showRegisterPopup = () => {
+    console.log("register popup triggered")
+    this.setState({
+      showRegister: true
+    })
+  }
+
+  closeRegisterPopup = () => {
+    console.log("register popup closed")
+    this.setState({
+      showRegister: false
+    })
+  }
+
+  handleRegister = (e) => {
+  e.preventDefault()
+  console.log("etarget", e.target)
+  fetch(baseURL + '/users/register', {
+    method: 'POST',
+    body: JSON.stringify({
+      username: e.target.username.value,
+      email: e.target.email.value,
+      password: e.target.password.value
+    }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(res => res.json())
+  .then(resJson => {
+    console.log(resJson)
+    this.getPins()
+  })
+}
+
+  handlAddClick = (e) => {
+    const [longitude, latitude] = e.lngLat;
+    this.setState({
+      setNewPlace: ({latitude, longitude})
+    })
+  }
+
+  handleAddPin = (pin) => {
+		const copyPins = [...this.state.pins]
+		copyPins.unshift(pin)
+		this.setState({pins: copyPins})
+	}
+
+  handleSubmit = (e) => {
+     e.preventDefault();
+     fetch("http://localhost:3001/pins", {
+         method: "POST",
+         body: JSON.stringify({
+           username: this.state.username,
+           title: this.state.title,
+           description: this.state.description,
+           rating: this.state.rating,
+           longitude: this.state.longitude,
+           latitude: this.state.latitude
+         }),
+         headers: { "Content-Type": "application/json"}
+       }).then (res => res.json())
+       .then (resJson => {
+         console.log("NewPin - resJson", resJson)
+         this.handleAddPin(resJson)
+         this.setState({
+           username: "",
+           title: "",
+           description: "",
+           rating:parseInt(""),
+           longitude: this.newPlace.latitude,
+           latitude: this.newPlace.longitude
+         }) // to go back on
+       })
+   }
+
+   handleChange = (e) => {this.setState({
+     name: e.target.value,
+     title: e.target.value,
+     description: e.target.value,
+     rating: e.target.value,
+   })
+ }
+
 
   render(){
     const { viewport } = this.state;
@@ -87,6 +179,7 @@ class App extends Component {
             transitionDuration="200"
             mapStyle="mapbox://styles/mapbox/streets-v9"
             onViewportChange={() => this.handleViewportChange()}
+            onDblClick={this.handleAddClick}
           >
           {this.state.pins.map((pins, index) => {
             // console.log(pins)
@@ -118,7 +211,7 @@ class App extends Component {
                     <label> Rating </label>
                     <div className="stars">
                     {Array(pins.rating).fill(<Star className="star" />)}
-                 
+
                     </div>
                     <label> Information</label>
                     <span className="username"> Created by <b> {pins.username}</b></span>
@@ -129,6 +222,75 @@ class App extends Component {
               </div>
         )
       })}
+      {this.newPlace &&
+        <Popup
+            latitude={newPlace.latitude}
+            longitude={newPlace.longitude}
+            closeButton={true}
+            closeOnClick={false}
+            anchor="left"
+            onClose={() => this.setState({
+              setNewPlace: null
+              })
+            }
+          >
+            <div>
+              <form onSubmit={this.handleSubmit}>
+                <label htmlFor="name">Title:</label>
+                <input
+                  placeholder="Enter a title"
+                  id="name"
+                  name="name"
+                  type="text"
+                  value={this.state.title}
+                  onChange={this.handleChange}
+                />
+                <label htmlFor="name">Review:</label>
+                <textarea
+                  placeholder="Enter a Review"
+                  id="description"
+                  name="description"
+                  value={this.state.description}
+                  onChange={this.handleChange}
+                />
+                <label htmlFor="name">Rating</label>
+                <select
+                placeholder="Enter a Rating"
+                id="rating"
+                name="rating"
+                value={this.state.rating}
+                onChange={this.handleChange}
+                >
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+                <input className="registerButton" type="submit" value="Create Pin" />
+              </form>
+            </div>
+          </Popup>
+      }
+
+          <button className="button logout">
+          Log out
+          </button>
+          <div className="buttons">
+          <button className="button login">
+          Log in
+          </button>
+          <button className="button register" onClick={this.showRegisterPopup}>
+          Register
+          </button>
+          </div>
+          {this.state.showRegister && (
+          <Register
+          closeRegisterPopup={this.closeRegisterPopup}
+          getPins={this.getPins}
+          handleRegister={this.handleRegister}
+          />
+        )}
           </Map>
         </div>
     );
