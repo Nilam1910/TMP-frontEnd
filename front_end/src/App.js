@@ -222,56 +222,6 @@ class App extends Component {
               </div>
         )
       })}
-      {this.newPlace &&
-        <Popup
-            latitude={newPlace.latitude}
-            longitude={newPlace.longitude}
-            closeButton={true}
-            closeOnClick={false}
-            anchor="left"
-            onClose={() => this.setState({
-              setNewPlace: null
-              })
-            }
-          >
-            <div>
-              <form onSubmit={this.handleSubmit}>
-                <label htmlFor="name">Title:</label>
-                <input
-                  placeholder="Enter a title"
-                  id="name"
-                  name="name"
-                  type="text"
-                  value={this.state.title}
-                  onChange={this.handleChange}
-                />
-                <label htmlFor="name">Review:</label>
-                <textarea
-                  placeholder="Enter a Review"
-                  id="description"
-                  name="description"
-                  value={this.state.description}
-                  onChange={this.handleChange}
-                />
-                <label htmlFor="name">Rating</label>
-                <select
-                placeholder="Enter a Rating"
-                id="rating"
-                name="rating"
-                value={this.state.rating}
-                onChange={this.handleChange}
-                >
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select>
-                <input className="registerButton" type="submit" value="Create Pin" />
-              </form>
-            </div>
-          </Popup>
-      }
 
           <button className="button logout">
           Log out
