@@ -32,12 +32,7 @@ class App extends Component {
         showRegister: false,
         newPlace: null,
         setNewPlace: null,
-        name: "",
-        title: "",
-        description: "",
-        rating:parseInt(""),
 			}
-      this.closeRegisterPopup = this.closeRegisterPopup.bind(this)
 	}
   // componentDidMount - runs only once when the comp is mounted for the first time
 	componentDidMount() {
