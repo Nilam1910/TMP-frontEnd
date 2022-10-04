@@ -3,65 +3,43 @@ import React, { Component } from 'react'
 class NewPin extends Component {
    constructor(props) {
      super(props)
-     this.state={
-     name: "",
-     title: "",
-     description: "",
-     rating:parseInt(""),
-     longitude:parseInt(""),
-     latitude:parseInt(""),
-    }
+     this.state = {name: ""}
    }
    // call this function on every keystroke (every creation)
-   handleChange = (e) => {this.setState({
-     name: e.target.value,
-     title: e.target.value,
-     description: e.target.value,
-     rating: e.target.value,
-     longitude: e.target.value,
-     latitude: e.target.value
-   })
- }
+   handleChange = (e) => {this.setState({name: e.target.value})}
 
+   componentsDidMount(){ // this one use to check the handleSubmit is working // only oneTime
+     this.handleSubmit() // we don't need to use fat arrow because its already bind that level of component // or because its called from this component like handleSubmit
+   }
    // call this function when the user submits the form (handleSubmit do create the new item we handle over new form its responsibility to post that form in backend)(in form we doing post method)
    handleSubmit = (e) => {
       e.preventDefault();
       fetch("http://localhost:3001/pins", {
           method: "POST",
-          body: JSON.stringify({
-            username: this.state.username,
-            title: this.state.title,
-            description: this.state.description,
-            rating: this.state.rating,
-            longitude: this.state.longitude,
-            latitude: this.state.latitude
-          }),
+          body: JSON.stringify({username: this.state.username}),
           headers: { "Content-Type": "application/json"}
         }).then (res => res.json())
         .then (resJson => {
           console.log("NewPin - resJson", resJson)
           this.props.handleAddPin(resJson)
-          this.setState({
-            username: "",
-            title: "",
-            description: "",
-            rating:parseInt(""),
-            longitude: parseInt(""),
-            latitude:parseInt("")
-          }) // to go back on
+          this.setState({username: ""}) // to go back on
         })
     }
   render() {
     return (
       <>
         <form onSubmit={this.handleSubmit}>
-        <label htmlFor="name">Username: </label>
-        <input id="name" name="username" className="username" type="text" placeholder="username" onChange={this.handleChange} value={this.state.username} />
-        <label htmlFor="name">Title: </label>
-        <input  id="title" name="title" type="text" placeholder="title" onChange={this.handleChange} value={this.state.title} />
-        <label htmlFor="name">Rating: </label>
-        <input id="rating" name="rating" type="number" placeholder="rating" onChange={this.handleChange} value={this.state.rating} />
-        <input className="registerButton" type="submit" value="Create Pin" />
+          <label htmlFor="username">UserName: </label>
+            <input
+              type="text"
+              id="username"
+              username="username"
+              onChange={this.handleChange}
+              value={this.state.username}
+              placeholder="add a pin"
+          />
+            <input type="submit" value="Add a reason to Visit" />
+
         </form>
       </>
     )

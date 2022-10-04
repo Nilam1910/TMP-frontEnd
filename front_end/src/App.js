@@ -1,7 +1,7 @@
 import './App.css';
 import React, { Component, useEffect, useState } from 'react'
 import Map, {Marker, Popup} from 'react-map-gl';
-import {Room, Star }from '@material-ui/icons';
+import {Room, Star}from '@material-ui/icons';
 import { format } from 'timeago.js';
 import Register from "./components/Register"
 
@@ -117,54 +117,18 @@ class App extends Component {
   })
 }
 
-  handlAddClick = (e) => {
-    const [longitude, latitude] = e.lngLat;
-    this.setState({
-      setNewPlace: ({latitude, longitude})
-    })
+ deletePin = (id) => {
+    fetch(baseURL + '/pins/' + id, {
+      method: 'DELETE'
+    }).then( res => {
+      const copyPins = [...this.state.pins]
+      const findIndex = this.state.pins.findIndex(pin => pin._id === id)
+      copyPins.splice(findIndex, 1)
+      this.setState({
+        pins: copyPins
+      });
+    });
   }
-
-  handleAddPin = (pin) => {
-		const copyPins = [...this.state.pins]
-		copyPins.unshift(pin)
-		this.setState({pins: copyPins})
-	}
-
-  handleSubmit = (e) => {
-     e.preventDefault();
-     fetch("http://localhost:3001/pins", {
-         method: "POST",
-         body: JSON.stringify({
-           username: this.state.username,
-           title: this.state.title,
-           description: this.state.description,
-           rating: this.state.rating,
-           longitude: this.state.longitude,
-           latitude: this.state.latitude
-         }),
-         headers: { "Content-Type": "application/json"}
-       }).then (res => res.json())
-       .then (resJson => {
-         console.log("NewPin - resJson", resJson)
-         this.handleAddPin(resJson)
-         this.setState({
-           username: "",
-           title: "",
-           description: "",
-           rating:parseInt(""),
-           longitude: this.newPlace.latitude,
-           latitude: this.newPlace.longitude
-         }) // to go back on
-       })
-   }
-
-   handleChange = (e) => {this.setState({
-     name: e.target.value,
-     title: e.target.value,
-     description: e.target.value,
-     rating: e.target.value,
-   })
- }
 
 
   render(){
@@ -179,7 +143,6 @@ class App extends Component {
             transitionDuration="200"
             mapStyle="mapbox://styles/mapbox/streets-v9"
             onViewportChange={() => this.handleViewportChange()}
-            onDblClick={this.handleAddClick}
           >
           {this.state.pins.map((pins, index) => {
             // console.log(pins)
@@ -217,6 +180,12 @@ class App extends Component {
                     <span className="username"> Created by <b> {pins.username}</b></span>
                     <span className="date"> {format(pins.createdAt)} </span>
                   </div>
+                  <button
+                  className="buttonDelete"
+                  onClick={() => this.deletePin(pins._id)}
+                  >
+                  Delete Pin
+                  </button>
                 </Popup>
               )}
               </div>
