@@ -1,0 +1,35 @@
+.formContainer {
+  width: 300px;
+  height: 300px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.registerCancel {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+}
+
+.label1 {
+  color: white;
+  text-decoration: none;
+}
+
+.username {
+  height: 5vh;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
