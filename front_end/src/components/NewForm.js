@@ -83,7 +83,7 @@ class NewForm extends Component {
             className="username"
             id="rating"
             name="rating"
-            placeholder="enter the longitude"
+            placeholder="enter your rating "
         />
           <label className="label1" htmlFor="longitude"> Longitude: </label>
             <input

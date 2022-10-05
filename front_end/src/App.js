@@ -114,12 +114,16 @@ class App extends Component {
     console.log(resJson)
     this.getPins()
   })
+  this.setState({
+    showRegister:false 
+  })
 }
 
 showLoginPopup = () => {
       console.log("login popup triggered")
       this.setState({
-        showLogin: true
+        showLogin: true,
+        
       })
     }
 
@@ -194,7 +198,11 @@ handleLogin = (e) => {
     console.log("handleAddFormWorking")
     const copyPins = [...this.state.pins]
     copyPins.unshift(pin)
-    this.setState({pins: copyPins})
+    this.setState({
+      pins: copyPins,
+      showPopup: false,
+      showForm: false
+    })
   }
 
   showFormPopup = () => {
