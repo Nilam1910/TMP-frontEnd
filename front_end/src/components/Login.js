@@ -1,4 +1,4 @@
-import React, { Component} from 'react'
+import React, { Component } from 'react'
 import {Cancel , Room} from "@material-ui/icons"
 import "./login.css"
 
