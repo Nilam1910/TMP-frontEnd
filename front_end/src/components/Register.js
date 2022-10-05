@@ -32,7 +32,7 @@ class Register extends Component {
         <h1 className="h1-register">CREATE AN ACCOUNT</h1>
         <form onSubmit={this.props.handleRegister}>
           <label className="label1" htmlFor="name">Username: </label>
-          <input id="name" name="username" className="username" type="text" placeholder="username" />
+          <input id="username" name="username" className="username" type="text" placeholder="username" />
           <label className="label1" htmlFor="name">Email: </label>
           <input  id="email" name="email" className="email" type="email" placeholder="email" />
           <label className="" htmlFor="name">Password: </label>

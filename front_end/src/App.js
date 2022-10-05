@@ -3,6 +3,7 @@ import React, { Component, useEffect, useState } from 'react'
 import Map, {Marker, Popup} from 'react-map-gl';
 import {Room, Star}from '@material-ui/icons';
 import { format } from 'timeago.js';
+import Login from "./components/Login"
 import Register from "./components/Register"
 import NewForm from "./components/NewForm"
 
@@ -29,6 +30,9 @@ class App extends Component {
           zoom: 4
         },
         showPopup: false,
+        showLogin: false,
+        setCurrentUser: null ,
+        showLogout: false,
         currentLocation: null,
         showRegister: false,
         showForm: false
@@ -112,6 +116,67 @@ class App extends Component {
   })
 }
 
+showLoginPopup = () => {
+      console.log("login popup triggered")
+      this.setState({
+        showLogin: true
+      })
+    }
+
+closeLoginPopup = () => {
+  console.log("login popup closed")
+  this.setState({
+  showLogin: false
+
+  })
+}
+
+handleLogin = (e) => {
+    e.preventDefault()
+    console.log("etarget", e.target.username.value, e.target.email.value, e.target.password.value)
+    console.log(baseURL)
+    fetch(baseURL + '/users/signin', {
+      method: 'POST',
+      body: JSON.stringify({
+        username: e.target.username.value,
+        email: e.target.email.value,
+        password: e.target.password.value
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(res => {
+      if (res.ok) return res.json()
+      console.log(res)
+    })
+      .then(resJson => {
+      console.log("resjson", resJson)
+      this.getPins()
+    })
+    this.setState({
+      setCurrentUser: true,
+      showLogin: false,
+      showLogout: true
+
+    })
+  }
+
+  showLogoutButton = () => {
+      console.log("shows logout button")
+      this.setState({
+        setCurrentUser: true,
+        showLogout: true
+      })
+    }
+
+    handleLogOut= () => {
+      this.setState({
+        showLogout: true,
+        setCurrentUser: false,
+        showLogin: false,
+      })
+    }
+
  deletePin = (id) => {
     fetch(baseURL + '/pins/' + id, {
       method: 'DELETE'
@@ -125,7 +190,7 @@ class App extends Component {
     });
   }
 
-  handleAddForm = (pin) => {
+  handleAddPin = (pin) => {
     console.log("handleAddFormWorking")
     const copyPins = [...this.state.pins]
     copyPins.unshift(pin)
@@ -213,16 +278,31 @@ class App extends Component {
           >
             Add Pin
           </button>
-          <button className="button login">
+          <button
+          className="button login"
+          onClick={this.showLoginPopup}
+          >
           Log in
           </button>
           <button className="button register" onClick={this.showRegisterPopup}>
           Register
           </button>
-          <button className="button logout">
+          <button
+          className="button logout"
+          onClick={this.handleLogOut}
+          >
           Log out
           </button>
           </div>
+          {this.state.showLogin && (
+            <Login
+            closeLoginPopup={this.closeLoginPopup}
+            getPins={this.getPins}
+            handleLogin={this.handleLogin}
+            handleLogOut={this.handleLogOut}
+            />
+            )}
+
           {this.state.showRegister && (
           <Register
           closeRegisterPopup={this.closeRegisterPopup}
@@ -232,7 +312,7 @@ class App extends Component {
         )}
         {this.state.showForm && (
         <NewForm
-        handleAddForm={this.handleAddForm}
+        handleAddPin={this.handleAddPin}
         closeFormPopup={this.closeFormPopup}
           />
         )}
