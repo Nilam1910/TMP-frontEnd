@@ -271,55 +271,55 @@ handleLogin = (e) => {
               </div>
         )
       })}
-          <div className="buttons">
-          <button
-          className="button login"
-          onClick={this.showFormPopup}
-          >
-            Add Pin
-          </button>
-          <button
-          className="button login"
-          onClick={this.showLoginPopup}
-          >
-          Log in
-          </button>
-          <button className="button register" onClick={this.showRegisterPopup}>
-          Register
-          </button>
-          <button
-          className="button logout"
-          onClick={this.handleLogOut}
-          >
-          Log out
-          </button>
-          </div>
-          {this.state.showLogin && (
-            <Login
-            closeLoginPopup={this.closeLoginPopup}
-            getPins={this.getPins}
-            handleLogin={this.handleLogin}
-            handleLogOut={this.handleLogOut}
-            />
-            )}
+      <div className="buttons">
+      <button
+      className="button login"
+      onClick={this.showFormPopup}
+      >
+        Add Pin
+      </button>
+      <button
+      className="button login"
+      onClick={this.showLoginPopup}
+      >
+      Log in
+      </button>
+      <button className="button register" onClick={this.showRegisterPopup}>
+      Register
+      </button>
+      <button
+      className="button logout"
+      onClick={this.handleLogOut}
+      >
+      Log out
+      </button>
+      </div>
+      {this.state.showLogin && (
+        <Login
+        closeLoginPopup={this.closeLoginPopup}
+        getPins={this.getPins}
+        handleLogin={this.handleLogin}
+        handleLogOut={this.handleLogOut}
+        />
+        )}
 
-          {this.state.showRegister && (
-          <Register
-          closeRegisterPopup={this.closeRegisterPopup}
-          getPins={this.getPins}
-          handleRegister={this.handleRegister}
-          />
-        )}
-        {this.state.showForm && (
-        <NewForm
-        handleAddPin={this.handleAddPin}
-        closeFormPopup={this.closeFormPopup}
-          />
-        )}
-          </Map>
-        </div>
-    );
-  }
+      {this.state.showRegister && (
+      <Register
+      closeRegisterPopup={this.closeRegisterPopup}
+      getPins={this.getPins}
+      handleRegister={this.handleRegister}
+      />
+    )}
+    {this.state.showForm && (
+    <NewForm
+    handleAddPin={this.handleAddPin}
+    closeFormPopup={this.closeFormPopup}
+      />
+    )}
+      </Map>
+    </div>
+);
+}
 }
 
 // comment //

@@ -4,7 +4,7 @@
   padding: 20px;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.7);
-  position: center;
+  position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
@@ -67,17 +67,6 @@
   margin-bottom: 15px;
 }
 
-.success {
-  color: green;
-  font-size: 12px;
-  text-align: center;
-}
-
-.failure {
-  color: red;
-  font-size: 12px;
-  text-align: center;
-}
 
 .registerCancel {
   position: absolute;
