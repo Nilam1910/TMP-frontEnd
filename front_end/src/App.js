@@ -12,8 +12,7 @@ let baseURL = ""
 
 if(process.env.NODE_ENV === "development"){
   baseURL = "http://localhost:3001"
-} else {
-  baseURL = "Your heroku backend url here"
+} else { https://travelpinsapp.herokuapp.com/
 }
 console.log("Current base URL: ", baseURL)
 
