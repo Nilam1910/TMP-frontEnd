@@ -3,6 +3,7 @@ import React, { Component, useEffect, useState } from 'react'
 import Map, {Marker, Popup} from 'react-map-gl';
 import {Room, Star }from '@material-ui/icons';
 import { format } from 'timeago.js';
+import Login from "./components/Login"
 
 
 let baseURL = ""
@@ -28,11 +29,16 @@ class App extends Component {
         },
         showPopup: false,
         currentLocation: null,
+        showLogin: false,
+        setCurrentUser: null ,
+        showLogout: false,
+
 			}
 	}
   // componentDidMount - runs only once when the comp is mounted for the first time
 	componentDidMount() {
 		this.getPins()
+    
 	}
 
   getPins = () => {
@@ -73,6 +79,87 @@ class App extends Component {
       currentLocation: null
     })
   }
+
+  showLoginPopup = () => {
+    console.log("login popup triggered")
+    this.setState({
+      showLogin: true
+    })
+  }
+
+  closeLoginPopup = () => {
+    console.log("login popup closed")
+    this.setState({
+      showLogin: false
+      
+    })
+  }
+
+  handleLogin = (e) => {
+    e.preventDefault()
+    console.log("etarget", e.target.username.value, e.target.email.value, e.target.password.value)
+    console.log(baseURL)
+    fetch(baseURL + '/users/signin', {
+      method: 'POST',
+      body: JSON.stringify({
+        username: e.target.username.value,
+        email: e.target.email.value,
+        password: e.target.password.value
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(res => {
+      if (res.ok) return res.json()
+      console.log(res)
+    })
+      .then(resJson => {
+      console.log("resjson", resJson)
+      this.getPins()
+    })
+    this.setState({
+      setCurrentUser: true,
+      showLogin: false,
+      showLogout: true
+
+    })
+  }
+
+  showLogoutButton = () => {
+    console.log("shows logout button")
+    this.setState({
+      setCurrentUser: true,
+      showLogout: true
+    })
+  }
+
+
+   handleLogOut= () => {
+     this.setState({
+       showLogout: true,
+    setCurrentUser: false,
+    showLogin: false,
+  
+     }
+     )
+     
+    }
+    //  fetch(baseURL + "/users/signout"), {
+    //    method: "DELETE",
+    //  } .then ((response) => response.json())
+    //  .then ((data) => {
+    //    console.log(data)
+    //  })  
+
+   
+
+
+  
+
+
+
+
+  
 
 
   render(){
@@ -129,6 +216,33 @@ class App extends Component {
               </div>
         )
       })}
+         {this.setCurrentUser ? (
+         <button className="button logout" onClick={this.handleLogOut}> 
+          Log out
+          </button> ) : (
+          <div className="buttons">
+          <button className="button login" onClick={this.showLoginPopup}>
+          Log in
+          </button>
+          <button className="button register">
+          Register
+          </button>
+          </div>
+          )}
+          {this.state.showLogin && (
+          <Login
+          closeLoginPopup={this.closeLoginPopup}
+          getPins={this.getPins}
+          handleLogin={this.handleLogin}
+          handleLogOut={this.handleLogOut}
+          
+
+          />
+        )} 
+
+
+
+
           </Map>
         </div>
     );
