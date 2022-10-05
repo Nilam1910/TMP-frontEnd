@@ -17,9 +17,9 @@ console.log("Current base URL: ", baseURL)
 
 class App extends Component {
   constructor(props){
-		super(props)
-			this.state = {
-				pins: [],
+    super(props)
+      this.state = {
+        pins: [],
         viewport: {
           width: "100%",
           height: "100%",
@@ -33,27 +33,27 @@ class App extends Component {
         setCurrentUser: null ,
         showLogout: false,
 
-			}
-	}
+      }
+  }
   // componentDidMount - runs only once when the comp is mounted for the first time
-	componentDidMount() {
-		this.getPins()
+  componentDidMount() {
+    this.getPins()
     
-	}
+  }
 
   getPins = () => {
-		fetch(baseURL + '/pins')
-			.then(res => {
-				if(res.status === 200) {
-					return res.json()
-				} else {
-					return []
-				}
-			}).then(data => {
-				console.log('data', data)
-				this.setState({pins: data.pins})
-			})
-	}
+    fetch(baseURL + '/pins')
+      .then(res => {
+        if(res.status === 200) {
+          return res.json()
+        } else {
+          return []
+        }
+      }).then(data => {
+        console.log('data', data)
+        this.setState({pins: data.pins})
+      })
+  }
 
   handleViewportChange = viewport => {
     this.setState({
