@@ -1,5 +1,5 @@
 import "./newform.css"
-import { Room, Star, Cancel } from '@material-ui/icons'
+import { Room,Cancel } from '@material-ui/icons'
 import React, { Component } from 'react'
 
 
@@ -43,6 +43,7 @@ class NewForm extends Component {
         .then (resJson => {
           console.log("NewForm - resJson", resJson)
           this.props.handleAddPin(resJson)
+          // this.props.handleEditPin(resJson)
         })
       }
   render() {
@@ -100,6 +101,7 @@ class NewForm extends Component {
               placeholder="enter the latitude"
           />
             <input type="submit" value="Create a Pin" />
+            <input type="submit" value="Edit in Pin" />
             <Cancel
             className="registerCancel"
             onClick={this.props.closeFormPopup}
