@@ -1,87 +1,56 @@
-.loginContainer {
-    width: 300px;
-    height: 300px;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.7);
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
+import React, { Component } from 'react'
+import {Cancel , Room} from "@material-ui/icons"
+import "./login.css"
+
+  let baseURL = ""
+
+    if(process.env.NODE_ENV === "development"){
+    baseURL = "http://localhost:3001"
+    } else {
+    baseURL = "Your heroku backend url here"
+    }
+    console.log("Current base URL: ", baseURL)
+
+  class Login extends Component {
+    constructor(props){
+        super(props)
+        this.state = {
+          success:false,
+          error: false,
+          setError: false,
+          setSuccess: true,
+      }
+    }
+
+  render() {
+    return (
+      <div className = "loginContainer">
+        <div className = "logo">
+        <Room />
+            Travel Pins
+        </div>
+        <h1 className="h1-login">Log In</h1>
+          <form onSubmit={this.props.handleLogin}>
+            <label className="label1" htmlFor="name">Username: </label>
+              <input id="username" name="username" className="username" type="text" placeholder="username" />
+            <label className="label1" htmlFor="name">Email: </label>
+              <input id="email" name="email" className="email" type="email" placeholder="email" />
+            <label className="password" htmlFor="name">Password: </label>
+              <input id="password" name="password" className="password" type="password" placeholder="password" />
+              <input className="loginButton" type="submit" value="Login" />
+          </form>
+            <Cancel
+            className="loginCancel"
+            onClick={this.props.closeLoginPopup}
+            />
+      </div>
+
+
+    )
   }
-  
-  .logo {
-    font-size: 30px;
-    color: slateblue;
-    display: flex;
-    align-items: center;
-    font-weight: 700;
-    margin-bottom: 8px;
-    margin-top: 5px;
-  }
-  
-  .h1-login {
-    font-size: 20px;
-    margin-top: 0;
-    margin-bottom: 1rem;
-    line-height: 1.2;
-    color: white;
-  }
-  
-  .username {
-    height: 5vh;
-    border-radius: 5px;
-    margin-bottom: 15px;
-  }
-  
-  .label1 {
-    color: white;
-    text-decoration: none;
-  }
-  
-  .password {
-    height: 5vh;
-    border-radius: 5px;
-    margin-bottom: 15px;
-  }
-  
-  .email {
-    height: 5vh;
-    border-radius: 5px;
-    margin-bottom: 15px;
-  }
-  
-  .loginButton {
-    border: none;
-    padding: 5px;
-    border-radius: 5px;
-    color: white;
-    background-color: slateblue;
-    cursor: pointer;
-    margin-bottom: 15px;
-  }
-  
-  .success {
-    color: green;
-    font-size: 12px;
-    text-align: center;
-  }
-  
-  .failure {
-    color: red;
-    font-size: 12px;
-    text-align: center;
-  }
-  
-  .loginCancel {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    cursor: pointer;
-  }
+}
+
+
+
+
+export default Login

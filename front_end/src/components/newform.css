@@ -1,6 +1,6 @@
 .formContainer {
   width: 300px;
-  height: 300px;
+  height: 450px;
   padding: 20px;
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.7);
@@ -16,20 +16,28 @@
   justify-content: space-around;
 }
 
-.registerCancel {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  cursor: pointer;
+logo {
+  font-size: 30px;
+  color: slateblue;
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  margin-top: 5px;
 }
 
-.label1 {
+.h1-register {
+  font-size: 20px;
+  margin-top: 0;
+  line-height: 1.2;
   color: white;
-  text-decoration: none;
 }
 
 .username {
   height: 5vh;
   border-radius: 5px;
-  margin-bottom: 15px;
+}
+
+.label1 {
+  color: white;
+  text-decoration: none;
 }

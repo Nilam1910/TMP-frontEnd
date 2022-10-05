@@ -1,11 +1,12 @@
 import './App.css';
-import React, { Component } from 'react'
+import React, { Component, useEffect, useState } from 'react'
 import Map, {Marker, Popup} from 'react-map-gl';
-import {Room, Star }from '@material-ui/icons';
+import {Room, Star}from '@material-ui/icons';
 import { format } from 'timeago.js';
 import Login from "./components/Login"
 import Register from "./components/Register"
 import NewForm from "./components/NewForm"
+
 
 let baseURL = ""
 
@@ -18,9 +19,9 @@ console.log("Current base URL: ", baseURL)
 
 class App extends Component {
   constructor(){
-    super()
-      this.state = {
-        pins: [],
+		super()
+			this.state = {
+				pins: [],
         viewport: {
           width: "100%",
           height: "100%",
@@ -29,101 +30,108 @@ class App extends Component {
           zoom: 4
         },
         showPopup: false,
-        currentLocation: null,
         showLogin: false,
         setCurrentUser: null ,
         showLogout: false,
+        currentLocation: null,
         showRegister: false,
         showForm: false
-      }
-  }
+			}
+	}
   // componentDidMount - runs only once when the comp is mounted for the first time
-    componentDidMount() {
-      this.getPins()
-    }
-      
-    getPins = () => {
-      fetch(baseURL + '/pins')
-        .then(res => {
-          if(res.status === 200) {
-            return res.json()
-          } else {
-            return []
-          }
-        }).then(data => {
-          console.log('data', data)
-          this.setState({pins: data.pins})
-        })
-    }
+	componentDidMount() {
+		this.getPins()
+	}
 
-    handleViewportChange = viewport => {
-      this.setState({
-        viewport: { ...this.state.viewport, ...viewport }
-      })
-    }
+  getPins = () => {
+		fetch(baseURL + '/pins')
+			.then(res => {
+				if(res.status === 200) {
+					return res.json()
+				} else {
+					return []
+				}
+			}).then(data => {
+				console.log('data', data)
+				this.setState({pins: data.pins})
+			})
+	}
 
-    handlePopUp = (id) => {
-      console.log("handle popup triggered")
-      this.setState({
-        currentLocation: id
-      })
-    }
-
-    handlePopUpTwo = () => {
-      console.log("handle popup triggered")
-      this.setState({
-        currentLocation: null
-      })
-    }
-    showRegisterPopup = () => {
-      console.log("register popup triggered")
-      this.setState({
-        showRegister: true
-      })
-    }
-
-    closeRegisterPopup = () => {
-      console.log("register popup closed")
-      this.setState({
-        showRegister: false
-      })
-    }
-
-    handleRegister = (e) => {
-    e.preventDefault()
-    console.log("etarget", e.target)
-    fetch(baseURL + '/users/register', {
-      method: 'POST',
-      body: JSON.stringify({
-        username: e.target.username.value,
-        email: e.target.email.value,
-        password: e.target.password.value
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then(res => res.json())
-    .then(resJson => {
-      console.log(resJson)
-      this.getPins()
+  handleViewportChange = viewport => {
+    this.setState({
+      viewport: { ...this.state.viewport, ...viewport }
     })
   }
-    showLoginPopup = () => {
+
+
+  // handlePopupThree = (id) => {
+  //   currentlocation(id)
+  // }
+
+  handlePopUp = (id) => {
+    console.log("handle popup triggered")
+    this.setState({
+      currentLocation: id
+    })
+  }
+
+  handlePopUpTwo = () => {
+    console.log("handle popup triggered")
+    this.setState({
+      currentLocation: null
+    })
+  }
+
+  showRegisterPopup = () => {
+    console.log("register popup triggered")
+    this.setState({
+      showRegister: true
+    })
+  }
+
+  closeRegisterPopup = () => {
+    console.log("register popup closed")
+    this.setState({
+      showRegister: false
+    })
+  }
+
+  handleRegister = (e) => {
+  e.preventDefault()
+  console.log("etarget", e.target)
+  fetch(baseURL + '/users/register', {
+    method: 'POST',
+    body: JSON.stringify({
+      username: e.target.username.value,
+      email: e.target.email.value,
+      password: e.target.password.value
+    }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(res => res.json())
+  .then(resJson => {
+    console.log(resJson)
+    this.getPins()
+  })
+}
+
+showLoginPopup = () => {
       console.log("login popup triggered")
       this.setState({
         showLogin: true
       })
     }
 
-    closeLoginPopup = () => {
-      console.log("login popup closed")
-      this.setState({
-        showLogin: false
-        
-      })
-    }
+closeLoginPopup = () => {
+  console.log("login popup closed")
+  this.setState({
+  showLogin: false
 
-  handleLogin = (e) => {
+  })
+}
+
+handleLogin = (e) => {
     e.preventDefault()
     console.log("etarget", e.target.username.value, e.target.email.value, e.target.password.value)
     console.log(baseURL)
@@ -153,7 +161,7 @@ class App extends Component {
     })
   }
 
-    showLogoutButton = () => {
+  showLogoutButton = () => {
       console.log("shows logout button")
       this.setState({
         setCurrentUser: true,
@@ -169,16 +177,9 @@ class App extends Component {
       })
     }
 
-    handleAddForm = (pin) => {
-      console.log("handleAddFormWorking")
-      const copyPins = [...this.state.pins]
-      copyPins.unshift(pin)
-      this.setState({pins: copyPins})
-    }
-    
-    deletePin = (id) => {
+ deletePin = (id) => {
     fetch(baseURL + '/pins/' + id, {
-    method: 'DELETE'
+      method: 'DELETE'
     }).then( res => {
       const copyPins = [...this.state.pins]
       const findIndex = this.state.pins.findIndex(pin => pin._id === id)
@@ -189,24 +190,32 @@ class App extends Component {
     });
   }
 
-    showFormPopup = () => {
-      console.log("form popup triggered")
-      this.setState({
-        showForm: true
-      })
-    }
+  handleAddPin = (pin) => {
+    console.log("handleAddFormWorking")
+    const copyPins = [...this.state.pins]
+    copyPins.unshift(pin)
+    this.setState({pins: copyPins})
+  }
 
-    closeFormPopup = () => {
-      console.log("form popup closed")
-      this.setState({
-        showForm: false
-      })
-    }
+  showFormPopup = () => {
+    console.log("form popup triggered")
+    this.setState({
+      showForm: true
+    })
+  }
+
+  closeFormPopup = () => {
+    console.log("form popup closed")
+    this.setState({
+      showForm: false
+    })
+  }
+
   render(){
     const { viewport } = this.state;
     return (
-    <div style={{ height: "100vh", width: "100vw"}}>
-      <Map
+      <div style={{ height: "100vh", width: "100vw"}}>
+        <Map
             initialViewState={{ ...viewport }}
             mapboxAccessToken={process.env.REACT_APP_MAPBOX}
             width="100%"
@@ -214,62 +223,77 @@ class App extends Component {
             transitionDuration="200"
             mapStyle="mapbox://styles/mapbox/streets-v9"
             onViewportChange={() => this.handleViewportChange()}
-      >
+          >
           {this.state.pins.map((pins, index) => {
             // console.log(pins)
             return (
-        <div  key={pins._id}>
-            <Marker
-              longitude={pins.longitude}
-              latitude={pins.latitude}
-              offsetLeft={-viewport.zoom * 5}
-              offsetTop={-viewport.zoom * 10}
-              onClick={() => this.handlePopUp(pins._id, pins.latitude, pins.longitude)}
-            >
-            </Marker>
-                  {/*  {console.log("showpopup", this.state.showPopup)} */}
-            {pins._id === this.state.currentLocation && (
-            <Popup
-              longitude={pins.longitude}
-              latitude={pins.latitude}
-              closeButton={true}
-              closeOnClick={false}
-              onClose={() => this.handlePopUpTwo()}
-              anchor="left"
-            >
-          <div className ="card">
-              <label> Place </label>
-              <h4 className="place"> {pins.title} </h4>
-              <label> Review </label>
-              <p className="desc"> {pins.description}</p>
-              <label> Rating </label>
-            <div className="stars">
-                {Array(pins.rating).fill(<Star className="star" />)}
-            </div>
-              <label> Information</label>
-                <span className="username"> Created by: <b> {pins.username} </b> </span>
-                <span className="date"> Created When: <b> {format(pins.createdAt)} </b> </span>
-              <button className="buttonDelete"
-                onClick={() => this.deletePin(pins._id)}
-              > Delete Pin 
-              </button>
-          </div>
-            </Popup>
-          )}
-        </div>
+              <div key={pins._id}>
+                <Marker
+                  longitude={pins.longitude}
+                  latitude={pins.latitude}
+                  offsetLeft={-viewport.zoom * 5}
+                  offsetTop={-viewport.zoom * 10}
+                  onClick={() => this.handlePopUp(pins._id, pins.latitude, pins.longitude)}
+                >
+                </Marker>
+                // {console.log("showpopup", this.state.showPopup)}
+                {pins._id === this.state.currentLocation && (
+                <Popup
+                 longitude={pins.longitude}
+                 latitude={pins.latitude}
+                 closeButton={true}
+                 closeOnClick={false}
+                 onClose={() => this.handlePopUpTwo()}
+                 anchor="left"
+                 >
+                  <div className ="card">
+                    <label> Place </label>
+                    <h4 className="place"> {pins.title} </h4>
+                    <label> Review </label>
+                    <p className="desc"> {pins.description}</p>
+                    <label> Rating </label>
+                    <div className="stars">
+                    {Array(pins.rating).fill(<Star className="star" />)}
+
+                    </div>
+                    <label> Information</label>
+                    <span className="username"> Created by: <b> {pins.username}</b></span>
+                    <span className="date"> Created When: <b> {format(pins.createdAt)}</b> </span>
+                  </div>
+                  <button
+                  className="buttonDelete"
+                  onClick={() => this.deletePin(pins._id)}
+                  >
+                  Delete Pin
+                  </button>
+                </Popup>
+              )}
+              </div>
         )
       })}
-      <div className="buttons">
-         
-           <button  className="button register" onClick={this.showRegisterPopup}> Register </button>
-          {this.state.showRegister && (
-            <Register
-            closeRegisterPopup={this.closeRegisterPopup}
-            getPins={this.getPins}
-            handleRegister={this.handleRegister}
-            />
-            )}
-
+          <div className="buttons">
+          <button
+          className="button login"
+          onClick={this.showFormPopup}
+          >
+            Add Pin
+          </button>
+          <button
+          className="button login"
+          onClick={this.showLoginPopup}
+          >
+          Log in
+          </button>
+          <button className="button register" onClick={this.showRegisterPopup}>
+          Register
+          </button>
+          <button
+          className="button logout"
+          onClick={this.handleLogOut}
+          >
+          Log out
+          </button>
+          </div>
           {this.state.showLogin && (
             <Login
             closeLoginPopup={this.closeLoginPopup}
@@ -277,31 +301,30 @@ class App extends Component {
             handleLogin={this.handleLogin}
             handleLogOut={this.handleLogOut}
             />
-            )} 
+            )}
 
-          {this.setCurrentUser ? (
-              <button className="loginButton" onClick={this.showLoginPopup}>Log in</button>
-              ) : ( 
-              <button className="logoutButton" onClick={this.handleLogOut}>Log out</button> 
-                  
-            )}               
-
-           
-           <button className="addPinButton"
-                  onClick={this.showFormPopup}
-          > Add Pin 
-          </button>
-          {this.state.showForm && (
-          <NewForm
-          handleAddForm={this.handleAddForm}
-          closeFormPopup={this.closeFormPopup}
+          {this.state.showRegister && (
+          <Register
+          closeRegisterPopup={this.closeRegisterPopup}
+          getPins={this.getPins}
+          handleRegister={this.handleRegister}
           />
         )}
-      </div>
-      </Map>
-    </div>
+        {this.state.showForm && (
+        <NewForm
+        handleAddPin={this.handleAddPin}
+        closeFormPopup={this.closeFormPopup}
+          />
+        )}
+          </Map>
+        </div>
     );
   }
 }
+
+// comment //
+// some thing testig
+// I added the Popup
+
 
 export default App

@@ -21,13 +21,13 @@ import "./login.css"
           setSuccess: true,
       }
     }
-    
+
   render() {
     return (
       <div className = "loginContainer">
         <div className = "logo">
         <Room />
-            Travel Pins 
+            Travel Pins
         </div>
         <h1 className="h1-login">Log In</h1>
           <form onSubmit={this.props.handleLogin}>
