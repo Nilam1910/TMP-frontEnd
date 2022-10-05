@@ -74,35 +74,17 @@ input::placeholder, textarea::placeholder {
   cursor: pointer;
 }
 
-.button {
-    border: none;
-    padding: 5px;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-}
-
-.logout {
-    background-color: tomato;
-}
-
-.login {
-    background-color: teal;
-    margin-right: 10px;
-}
-
-.register {
-    background-color: slateblue;
-}
-
 .buttons{
     position: absolute;
     top: 10px;
     right: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-.logout {
-  margin-left: 8px;
+.logoutButton {
+  background-color: tomato;
 }
 
 .buttonDelete {
@@ -115,40 +97,15 @@ input::placeholder, textarea::placeholder {
   margin-top: 10px;
 }
 
-.button {
-  border: none;
-  padding: 5px;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-}
-
-.logout {
-  background-color: tomato;
-}
-
-.login {
-  background-color: teal;
-  margin-right: 10px;
-}
-
 .register {
   background-color: slateblue;
 }
 
-.buttons, .logout {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-
+.loginButton{
+  background-color: rgb(0, 62, 128);
 }
 
-.buttonDelete {
-border: none;
-padding: 5px;
-border-radius: 5px;
-color: white;
-background-color: red;
-cursor: pointer;
-margin-top: 10px;
+.addPinButton{
+  background-color: forestgreen;
+  margin-right: 30px;
 }
