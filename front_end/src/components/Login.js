@@ -30,7 +30,7 @@ import "./login.css"
             Travel Pins
         </div>
         <h1 className="h1-login">Log In</h1>
-          <form onSubmit={this.props.handleLogin}>
+          <form onSubmit={this.props.handleLogin} action= "/map">
             <label className="label1" htmlFor="name">Username: </label>
               <input id="username" name="username" className="username" type="text" placeholder="username" />
             <label className="label1" htmlFor="name">Email: </label>
@@ -38,11 +38,14 @@ import "./login.css"
             <label className="password" htmlFor="name">Password: </label>
               <input id="password" name="password" className="password" type="password" placeholder="password" />
               <input className="loginButton" type="submit" value="Login" />
+              <input className="loginButton" type="submit" value="Register"/>
+
           </form>
             <Cancel
             className="loginCancel"
             onClick={this.props.closeLoginPopup}
             />
+            
       </div>
 
 
