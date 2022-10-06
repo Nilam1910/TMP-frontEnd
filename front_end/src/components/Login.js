@@ -7,7 +7,7 @@ import "./login.css"
     if(process.env.NODE_ENV === "development"){
     baseURL = "http://localhost:3001"
     } else {
-    baseURL = `${process.env.}`
+    baseURL = `${process.env.REACT_APP_BACKEND_URL}/pins`
     }
     console.log("Current base URL: ", baseURL)
 
