@@ -6,6 +6,7 @@ import { format } from 'timeago.js';
 import Login from "./components/Login"
 import Register from "./components/Register"
 import NewForm from "./components/NewForm"
+// import EditPin from "./components/EditPin"
 
 
 let baseURL = ""
@@ -35,7 +36,7 @@ class App extends Component {
         showLogout: false,
         currentLocation: null,
         showRegister: false,
-        showForm: false
+        showEdit: false
 			}
 	}
   // componentDidMount - runs only once when the comp is mounted for the first time
@@ -115,7 +116,7 @@ class App extends Component {
     this.getPins()
   })
   this.setState({
-    showRegister:false 
+    showRegister:false
   })
 }
 
@@ -123,7 +124,7 @@ showLoginPopup = () => {
       console.log("login popup triggered")
       this.setState({
         showLogin: true,
-        
+
       })
     }
 
@@ -160,7 +161,7 @@ handleLogin = (e) => {
     this.setState({
       setCurrentUser: true,
       showLogin: false,
-      showLogout: true,
+      showLogout: true
 
     })
   }
@@ -173,23 +174,11 @@ handleLogin = (e) => {
       })
     }
 
-    handleLogOut= (e) => {
-      e.preventDefault()
-    console.log(baseURL)
-    fetch(baseURL + '/users/signout', {
-      method: 'DELETE',
-    }).then(res => {
-      if (res.ok) return res.json()
-      console.log(res)
-    })
-      .then(resJson => {
-      console.log("resjson", resJson)
-      this.getPins()
-    }) 
-       this.setState({
+    handleLogOut= () => {
+      this.setState({
+        showLogout: true,
         setCurrentUser: false,
-        showLogout: false,
-        showLogoutButton: false
+        showLogin: false,
       })
     }
 
@@ -228,6 +217,52 @@ handleLogin = (e) => {
     console.log("form popup closed")
     this.setState({
       showForm: false
+    })
+  }
+
+  showEditPopup = () => {
+    console.log("form popup triggered")
+    this.setState({
+      showEdit: true
+    })
+  }
+
+  closeEditPopup = () => {
+    console.log("form popup closed")
+    this.setState({
+      showEdit: false
+    })
+  }
+
+  editPin = (e, id) => {
+    e.preventDefault()
+  fetch(baseURL +'/pins/' + id, {
+    method: 'PUT',
+    body: JSON.stringify({
+      title: e.target.title.value,
+      description: e.target.description.value,
+      rating: parseFloat(e.target.rating.value),
+      longitude: parseFloat(e.target.longitude.value),
+      latitude: parseFloat(e.target.latitude.value)
+    }),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then (res => {
+    if(res.ok) return res.json()
+  })
+  .then (resJson => {
+    console.log("EditPin - resJson", resJson)
+    this.handleEdit(resJson)
+  })
+}
+
+  handleEdit = (pin) => {
+    console.log("handleEditFormWorking")
+    const copyPins = [...this.state.pins]
+    copyPins.unshift(pin)
+    this.setState({
+      pins: copyPins,
     })
   }
 
@@ -286,6 +321,12 @@ handleLogin = (e) => {
                   >
                   Delete Pin
                   </button>
+                  <button
+                    className="buttonEdit"
+                    onClick={this.showEditPopup}
+                  >
+                    Edit Pin
+                  </button>
                 </Popup>
               )}
               </div>
@@ -336,6 +377,13 @@ handleLogin = (e) => {
     closeFormPopup={this.closeFormPopup}
       />
     )}
+    {/* {this.state.showEdit && (
+    <EditPin
+    editPin={this.editPin}
+    handleEdit={this.handleEdit}
+    closeEditPopup={this.closeEditPopup}
+      />
+    )} */}
       </Map>
     </div>
 );
