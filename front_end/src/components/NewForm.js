@@ -24,7 +24,7 @@ class NewForm extends Component {
   //  call this function when the user submits the form (handleSubmit do create the new item we handle over new form its responsibility to post that form in backend)(in form we doing post method)
    handleSubmit = (e) => {
       e.preventDefault();
-      fetch("http://localhost:3001/pins", {
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/pins`, {
           method: "POST",
           body: JSON.stringify({
             username: e.target.username.value,

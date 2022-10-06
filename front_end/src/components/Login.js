@@ -7,7 +7,7 @@ import "./login.css"
     if(process.env.NODE_ENV === "development"){
     baseURL = "http://localhost:3001"
     } else {
-    baseURL = "Your heroku backend url here"
+    baseURL = `${process.env.}`
     }
     console.log("Current base URL: ", baseURL)
 

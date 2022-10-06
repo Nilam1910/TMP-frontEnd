@@ -1,7 +1,7 @@
 import './App.css';
-import React, { Component, useEffect, useState } from 'react'
+import React, { Component} from 'react'
 import Map, {Marker, Popup} from 'react-map-gl';
-import {Room, Star}from '@material-ui/icons';
+import {Star}from '@material-ui/icons';
 import { format } from 'timeago.js';
 import Login from "./components/Login"
 import Register from "./components/Register"
@@ -14,7 +14,7 @@ let baseURL = ""
 if(process.env.NODE_ENV === "development"){
   baseURL = "http://localhost:3001"
 } else {
-  baseURL = "Your heroku backend url here"
+  baseURL = `${process.env.REACT_APP_BACKEND_URL}/pins`
 }
 console.log("Current base URL: ", baseURL)
 
