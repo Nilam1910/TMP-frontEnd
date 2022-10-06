@@ -1,7 +1,7 @@
 import "./register.css"
-import {Room, Cancel }from '@material-ui/icons';
-import React, { Component, useEffect, useState, useRef } from 'react'
-import App from '../App.js'
+import {Room }from '@material-ui/icons';
+import React, { Component } from 'react'
+
 
 let baseURL = ""
 
@@ -10,6 +10,7 @@ if(process.env.NODE_ENV === "development"){
 } else {
   baseURL = "Your heroku backend url here"
 }
+console.log("Current base URL: ", baseURL)
 
 class Register extends Component {
   constructor(props){
