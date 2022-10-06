@@ -1,6 +1,6 @@
 import "./newform.css"
-import { Room, Star, Cancel } from '@material-ui/icons'
 import React, { Component } from 'react'
+import {BiXCircle } from "react-icons/bi";
 
 
 class NewForm extends Component {
@@ -48,10 +48,6 @@ class NewForm extends Component {
   render() {
     return (
       <div className="formContainer">
-      <div className="logo">
-      <Room />
-      Travel Pins
-      </div>
       <h1 className="h1-register">CREATE A PIN</h1>
         <form onSubmit={this.handleSubmit}>
           <label className="label1" htmlFor="username"> UserName: </label>
@@ -83,7 +79,7 @@ class NewForm extends Component {
             className="username"
             id="rating"
             name="rating"
-            placeholder="enter the longitude"
+            placeholder="enter your rating "
         />
           <label className="label1" htmlFor="longitude"> Longitude: </label>
             <input
@@ -100,7 +96,7 @@ class NewForm extends Component {
               placeholder="enter the latitude"
           />
             <input type="submit" value="Create a Pin" />
-            <Cancel
+            <BiXCircle
             className="registerCancel"
             onClick={this.props.closeFormPopup}
             />

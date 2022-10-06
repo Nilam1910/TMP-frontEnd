@@ -1,11 +1,11 @@
 import './App.css';
-import React, { Component, useEffect, useState } from 'react'
+import React, { Component} from 'react'
+import { BiStar, BiX } from "react-icons/bi";
 import Map, {Marker, Popup} from 'react-map-gl';
-import {Room, Star}from '@material-ui/icons';
-import { format } from 'timeago.js';
 import Login from "./components/Login"
 import Register from "./components/Register"
 import NewForm from "./components/NewForm"
+import EditPin from "./components/EditPin"
 
 
 let baseURL = ""
@@ -35,7 +35,8 @@ class App extends Component {
         showLogout: false,
         currentLocation: null,
         showRegister: false,
-        showForm: false
+        showEdit: false,
+        pinindex: null,
 			}
 	}
   // componentDidMount - runs only once when the comp is mounted for the first time
@@ -114,12 +115,16 @@ class App extends Component {
     console.log(resJson)
     this.getPins()
   })
+  this.setState({
+    showRegister:false
+  })
 }
 
 showLoginPopup = () => {
       console.log("login popup triggered")
       this.setState({
-        showLogin: true
+        showLogin: true,
+
       })
     }
 
@@ -194,7 +199,11 @@ handleLogin = (e) => {
     console.log("handleAddFormWorking")
     const copyPins = [...this.state.pins]
     copyPins.unshift(pin)
-    this.setState({pins: copyPins})
+    this.setState({
+      pins: copyPins,
+      showPopup: false,
+      showForm: false
+    })
   }
 
   showFormPopup = () => {
@@ -208,6 +217,32 @@ handleLogin = (e) => {
     console.log("form popup closed")
     this.setState({
       showForm: false
+    })
+  }
+
+  showEditPopup = (e, index) => {
+    console.log("form popup triggered")
+    console.log(index)
+    this.setState({
+      showEdit: true,
+      pinindex: index
+    })
+  }
+
+  closeEditPopup = () => {
+    console.log("form popup closed")
+    this.setState({
+      showEdit: false,
+      pinindex: null
+    })
+  }
+
+  handleEdit = (pin) => {
+    console.log("handleEditFormWorking")
+    const copyPins = [...this.state.pins]
+    copyPins.unshift(pin)
+    this.setState({
+      pins: copyPins,
     })
   }
 
@@ -253,18 +288,24 @@ handleLogin = (e) => {
                     <p className="desc"> {pins.description}</p>
                     <label> Rating </label>
                     <div className="stars">
-                    {Array(pins.rating).fill(<Star className="star" />)}
+                    {Array(pins.rating).fill(<BiStar className="star" />)}
 
                     </div>
                     <label> Information</label>
                     <span className="username"> Created by: <b> {pins.username}</b></span>
-                    <span className="date"> Created When: <b> {format(pins.createdAt)}</b> </span>
+                    <span className="date"> Created When: <b> {pins.createdAt}</b> </span>
                   </div>
                   <button
                   className="buttonDelete"
                   onClick={() => this.deletePin(pins._id)}
                   >
                   Delete Pin
+                  </button>
+                  <button
+                    className="buttonEdit"
+                    onClick={(e) => {this.showEditPopup(e, index)}}
+                  >
+                    Edit Pin
                   </button>
                 </Popup>
               )}
@@ -314,6 +355,15 @@ handleLogin = (e) => {
     <NewForm
     handleAddPin={this.handleAddPin}
     closeFormPopup={this.closeFormPopup}
+      />
+    )}
+    {this.state.showEdit && (
+    <EditPin
+    pinindex={this.state.pinindex}
+    pins={this.state.pins}
+    editPin={this.state.editPin}
+    handleEdit={this.handleEdit}
+    closeEditPopup={this.closeEditPopup}
       />
     )}
       </Map>

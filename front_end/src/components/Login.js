@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Cancel , Room} from "@material-ui/icons"
+import {BiXCircle } from "react-icons/bi";
 import "./login.css"
 
   let baseURL = ""
@@ -25,10 +25,6 @@ import "./login.css"
   render() {
     return (
       <div className = "loginContainer">
-        <div className = "logo">
-        <Room />
-            Travel Pins
-        </div>
         <h1 className="h1-login">Log In</h1>
           <form onSubmit={this.props.handleLogin}>
             <label className="label1" htmlFor="name">Username: </label>
@@ -39,7 +35,7 @@ import "./login.css"
               <input id="password" name="password" className="password" type="password" placeholder="password" />
               <input className="loginButton" type="submit" value="Login" />
           </form>
-            <Cancel
+            <BiXCircle
             className="loginCancel"
             onClick={this.props.closeLoginPopup}
             />

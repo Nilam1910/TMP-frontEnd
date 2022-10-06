@@ -1,7 +1,7 @@
 import "./register.css"
-import {Room, Cancel }from '@material-ui/icons';
-import React, { Component, useEffect, useState, useRef } from 'react'
+import React, { Component} from 'react'
 import App from '../App.js'
+import {BiXCircle } from "react-icons/bi";
 
 let baseURL = ""
 
@@ -25,10 +25,6 @@ class Register extends Component {
     render() {
     return (
       <div className="registerContainer">
-        <div className="logo">
-        <Room />
-        Travel Pins
-        </div>
         <h1 className="h1-register">CREATE AN ACCOUNT</h1>
         <form onSubmit={this.props.handleRegister}>
           <label className="label1" htmlFor="name">Username: </label>
@@ -39,7 +35,7 @@ class Register extends Component {
           <input id="password" name="password" className="password" type="password" placeholder="password" />
           <input className="registerButton" type="submit" value="Register" />
         </form>
-        <Cancel
+        <BiXCircle
         className="registerCancel"
         onClick={this.props.closeRegisterPopup}
         />
