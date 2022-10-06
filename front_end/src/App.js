@@ -160,7 +160,7 @@ handleLogin = (e) => {
     this.setState({
       setCurrentUser: true,
       showLogin: false,
-      showLogout: true
+      showLogout: true,
 
     })
   }
@@ -173,11 +173,23 @@ handleLogin = (e) => {
       })
     }
 
-    handleLogOut= () => {
-      this.setState({
-        showLogout: true,
+    handleLogOut= (e) => {
+      e.preventDefault()
+    console.log(baseURL)
+    fetch(baseURL + '/users/signout', {
+      method: 'DELETE',
+    }).then(res => {
+      if (res.ok) return res.json()
+      console.log(res)
+    })
+      .then(resJson => {
+      console.log("resjson", resJson)
+      this.getPins()
+    }) 
+       this.setState({
         setCurrentUser: false,
-        showLogin: false,
+        showLogout: false,
+        showLogoutButton: false
       })
     }
 
