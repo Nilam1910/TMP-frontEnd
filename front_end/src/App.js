@@ -190,16 +190,16 @@ class App extends Component {
     });
   }
 
-  // handleAddPin = (pin) => {
-  //   console.log("handleAddFormWorking")
-  //   const copyPins = [...this.state.pins]
-  //   copyPins.unshift(pin)
-  //   this.setState({
-  //     pins: copyPins,
-  //     showPopup: false,
-  //     showForm: false
-  //   })
-  // }
+  handleAddPin = (pin) => {
+    console.log("handleAddFormWorking")
+    const copyPins = [...this.state.pins]
+    copyPins.unshift(pin)
+    this.setState({
+      pins: copyPins,
+      showPopup: false,
+      showForm: false
+    })
+  }
 
   showFormPopup = () => {
     console.log("form popup triggered")
@@ -275,7 +275,6 @@ class App extends Component {
                     <label> Rating </label>
                     <div className="stars">
                     {Array(pins.rating).fill(<BiStar className="star" />)}
-
                     </div>
                     <label> Information</label>
                     <span className="username"> Created by: <b> {pins.username}</b></span>
@@ -306,15 +305,6 @@ class App extends Component {
         Add Pin
       </button>
       <button
-      className="button login"
-      onClick={this.showLoginPopup}
-      >
-      Log in
-      </button>
-      <button className="button register" onClick={this.showRegisterPopup}>
-      Register
-      </button>
-      <button
       className="button logout"
       onClick={this.handleLogOut}
       >
@@ -336,21 +326,21 @@ class App extends Component {
       getPins={this.getPins}
       handleRegister={this.handleRegister}
       />
-      )}
-      {this.state.showForm && (
-        <NewForm
-        handleAddPin={this.handleAddPin}
-        closeFormPopup={this.closeFormPopup}
-        />
-     )}
-      {this.state.showEdit && (
-      <EditPin
-      pinindex={this.state.pinindex}
-      pins={this.state.pins}
-      editPin={this.state.editPin}
-      handleEdit={this.handleEdit}
-      closeEditPopup={this.closeEditPopup}
-        />
+    )}
+    {this.state.showForm && (
+    <NewForm
+    handleAddPin={this.handleAddPin}
+    closeFormPopup={this.closeFormPopup}
+      />
+    )}
+    {this.state.showEdit && (
+    <EditPin
+    pinindex={this.state.pinindex}
+    pins={this.state.pins}
+    editPin={this.state.editPin}
+    handleEdit={this.handleEdit}
+    closeEditPopup={this.closeEditPopup}
+      />
     )}
       </Map>
     </div>

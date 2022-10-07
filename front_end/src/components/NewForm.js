@@ -1,4 +1,4 @@
-import "./newForm.css"
+import "./newform.css"
 import React, { Component } from 'react'
 import {  BiXCircle } from "react-icons/bi";
 
@@ -14,7 +14,7 @@ class NewForm extends Component {
        rating: "",
        longitude: "",
        latitude:"",
-      
+
      }
    }
    componentsDidMount(){ // this one use to check the handleSubmit is working // only oneTime
@@ -108,12 +108,12 @@ class NewForm extends Component {
               name="latitude"
               placeholder="enter the latitude"
             />
-            <input class ="create" type="submit" value="Create a Pin" /> 
+            <input class ="create" type="submit" value="Create a Pin" />
           </form>
               <BiXCircle
                 className="loginCancel"
                 onClick={this.props.closeLoginPopup}
-              />  
+              />
 
       </div>
     )
