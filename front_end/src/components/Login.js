@@ -68,7 +68,7 @@ import {Navigate } from "react-router-dom"
       }).then(res => {
         if (res.ok) return res.json()
         console.log(res)
-      })
+      }) 
         .then(resJson => {
         console.log("resJson", resJson)
         this.getPins()
