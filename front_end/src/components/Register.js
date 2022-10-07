@@ -1,7 +1,7 @@
 import "./register.css"
-import {Room, Cancel }from '@material-ui/icons';
-import React, { Component, useEffect, useState, useRef } from 'react'
-import App from '../App.js'
+
+import React, { Component } from 'react'
+
 import {Navigate } from "react-router-dom"
 
 let baseURL = ""
@@ -74,14 +74,10 @@ class Register extends Component {
   render() {
     return (
       
-      // <div className="registerContainer">
-      //   <div className="logo">AS
-      //   <Room />
-      //   Travel Pins
-      //   </div>
-      
-      <div>
-        
+      <div className="registerContainer">
+        <div className="logo">AS
+        Travel Pins
+        </div>
         <h1 className="h1-register">CREATE AN ACCOUNT</h1>
         <form  onSubmit={this.props.handleRegister}  action="/" method="POST">
           <label className="label1" htmlFor="name">Username: </label>
@@ -93,10 +89,7 @@ class Register extends Component {
           <input className="registerButton" type="submit" value="Register" />
          
         </form>
-        {/* <Cancel
-        className="registerCancel"
-        onClick={this.props.closeRegisterPopup}
-        /> */}
+       
       </div>
     )
   }

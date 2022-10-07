@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import App from "./App"
-import {Router, Link , Navigate, } from "react-router-dom"
-import "./components/login.css"
+import { Link  } from "react-router-dom"
 import Register from './components/Register'
+import Login from "./components/Login"
 
 
 
@@ -124,13 +123,6 @@ class Homepage extends Component {
       <div>
         <h1> This is the homepage !!!!!!!</h1>
         <Link to ="/map"> Map </Link>
-      
-      {/* {this.state.showLogin && (
-        <Login
-        getPins={this.getPins}
-        handleLogin={this.handleLogin}
-        />
-        )} */}
 
       {this.state.showRegister
        && (
