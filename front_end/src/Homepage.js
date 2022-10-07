@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import { Link  } from "react-router-dom"
+import {  Link } from "react-router-dom"
 import Register from './components/Register'
-import Login from "./components/Login"
+// import Login from "./components/Login"
 import {  BiXCircle } from "react-icons/bi";
+
+import "./homePage.css"
 
 
 
@@ -39,93 +41,112 @@ class Homepage extends Component {
 			}
 	}
 
-
-  handleRegister = (e) => {
-    e.preventDefault()
-    console.log("eTarget", e.target)
-    fetch(baseURL + '/users/register', {
-      method: 'POST',
-      body: JSON.stringify({
-        username: e.target.username.value,
-        email: e.target.email.value,
-        password: e.target.password.value
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then(res => res.json())
-    .then(resJson => {
-      console.log(resJson)
-      this.getPins()
-    })
-  }
-
-  handleLogin = (e) => {
-    e.preventDefault()
-    console.log("eTarget", e.target.username.value, e.target.email.value, e.target.password.value)
-    console.log(baseURL)
-    fetch(baseURL + '/users/signin', {
-      method: 'POST',
-      body: JSON.stringify({
-        username: e.target.username.value,
-        email: e.target.email.value,
-        password: e.target.password.value
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then(res => {
-      if (res.ok) return res.json()
-      console.log(res)
-    })
-      .then(resJson => {
-      console.log("resjson", resJson)
-      this.getPins()
-      
-    })
-   
-  }
-
-
-  getPins = () => {
-		fetch(baseURL + '/pins')
-			.then(res => {
-				if(res.status === 200) {
-					return res.json()
-				} else {
-					return []
-				}
-			}).then(data => {
-				console.log('data', data)
-				this.setState({pins: data.pins})
-			})
-	}
-
-  handleViewportChange = viewport => {
+  showRegisterPopup = () => {
+    console.log("register popup triggered")
     this.setState({
-      viewport: { ...this.state.viewport, ...viewport }
+      showRegister: true
     })
   }
+
+  closeRegisterPopup = () => {
+    console.log("register popup closed")
+    this.setState({
+      showRegister: false
+    })
+  }
+
+  // handleRegister = (e) => {
+  //   e.preventDefault()
+  //   console.log("eTarget", e.target)
+  //   fetch(baseURL + '/users/register', {
+  //     method: 'POST',
+  //     body: JSON.stringify({
+  //       username: e.target.username.value,
+  //       email: e.target.email.value,
+  //       password: e.target.password.value
+  //     }),
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     }
+  //   }).then(res => res.json())
+  //   .then(resJson => {
+  //     console.log(resJson)
+  //     this.getPins()
+  //   })
+  // }
+
+  // handleLogin = (e) => {
+  //   e.preventDefault()
+  //   console.log("eTarget", e.target.username.value, e.target.email.value, e.target.password.value)
+  //   console.log(baseURL)
+  //   fetch(baseURL + '/users/signin', {
+  //     method: 'POST',
+  //     body: JSON.stringify({
+  //       username: e.target.username.value,
+  //       email: e.target.email.value,
+  //       password: e.target.password.value
+  //     }),
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     }
+  //   }).then(res => {
+  //     if (res.ok) return res.json()
+  //     console.log(res)
+  //   })
+  //     .then(resJson => {
+  //     console.log("resjson", resJson)
+  //     this.getPins()
+      
+  //   })
+   
+  // }
+
+
+  // getPins = () => {
+	// 	fetch(baseURL + '/pins')
+	// 		.then(res => {
+	// 			if(res.status === 200) {
+	// 				return res.json()
+	// 			} else {
+	// 				return []
+	// 			}
+	// 		}).then(data => {
+	// 			console.log('data', data)
+	// 			this.setState({pins: data.pins})
+	// 		})
+	// }
+
+  // handleViewportChange = viewport => {
+  //   this.setState({
+  //     viewport: { ...this.state.viewport, ...viewport }
+  //   })
+  // }
 
   render() {
     return (
       <div className="mainPage">
         <h1 className="homePage" > This is the homepage !!!!!!! </h1>
       <Link className="map" to ="/map"> Map </Link>
+
         {this.state.showRegister && (
         <Register
           getPins={this.getPins}
           handleRegister={this.handleRegister}
+          closeRegisterPopup={this.closeRegisterPopup}
+          showRegisterPopup={this.props.showRegisterPopup}
         />
       )}
     
-      {this.state.showLogin && (
+      {/* {this.state.showLogin && (
         <Login
           closeLoginPopup={this.closeLoginPopup}
           getPins={this.getPins}
           handleLogin={this.handleLogin}
         />
-      )}
+      )} */}
+       <button className="button register" onClick={this.showRegisterPopup}>
+        Register
+      </button>
           
         <BiXCircle
           className="loginCancel"
@@ -137,3 +158,4 @@ class Homepage extends Component {
 }
 
 export default Homepage
+

@@ -22,6 +22,7 @@ class Register extends Component {
       setError: false,
       navigate: true,
       user: false,
+      showRegister: true
     }
   }
     
@@ -61,6 +62,19 @@ class Register extends Component {
       })
     })
   }
+  showRegisterPopup = () => {
+    console.log("register popup triggered")
+    this.setState({
+      showRegister: true
+    })
+  }
+
+  closeRegisterPopup = () => {
+    console.log("register popup closed")
+    this.setState({
+      showRegister: false
+    })
+  }
 
   render() {
     return (
@@ -91,3 +105,18 @@ class Register extends Component {
        
 
 export default Register
+
+
+
+
+
+
+
+  
+
+ 
+
+
+
+
+
