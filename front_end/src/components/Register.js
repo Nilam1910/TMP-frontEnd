@@ -13,6 +13,9 @@ if(process.env.NODE_ENV === "development"){
 }
 console.log("Current base URL: ", baseURL)
 
+
+
+
 class Register extends Component {
   constructor(props){
     super(props)
@@ -22,9 +25,11 @@ class Register extends Component {
       error: false,
       setError: false,
       navigate: true,
+      user: false,
    
       
     }
+    
   
   }
   getPins = () => {
@@ -45,7 +50,6 @@ class Register extends Component {
 
   handleRegister = (e) => {
     e.preventDefault()
-    const navigate= Navigate()
     console.log("etarget", e.target)
     fetch(baseURL + '/users/register', {
       method: 'POST',
@@ -60,13 +64,14 @@ class Register extends Component {
     }).then(res => res.json())
     .then(resJson => {
       console.log(resJson)
-      this.state.navigate("/map")
       this.getPins()
-      navigate("/map")
+      this.setState({
+        user: true
+      })
+
       
       
       
-     
     })
   }
   
@@ -81,9 +86,9 @@ class Register extends Component {
       //   </div>
       
       <div>
-        
+         {this.state.user && (<Navigate to ="/map" />) }
         <h1 className="h1-register">CREATE AN ACCOUNT</h1>
-        <form  onSubmit={this.props.handleRegister}  action="/" method="POST">
+        <form  onSubmit={this.handleRegister}  action="/map" >
           <label className="label1" htmlFor="name">Username: </label>
           <input id="username" name="username" className="username" type="text" placeholder="username" />
           <label className="label1" htmlFor="name">Email: </label>

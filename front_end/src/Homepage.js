@@ -3,6 +3,7 @@ import App from "./App"
 import {Router, Link , Navigate, } from "react-router-dom"
 import "./components/login.css"
 import Register from './components/Register'
+import Login from "./components/Login"
 
 
 
