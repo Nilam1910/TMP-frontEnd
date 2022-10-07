@@ -17,9 +17,7 @@ import {  BiXCircle } from "react-icons/bi";
 
 
 
-
 class Homepage extends Component {
-
   constructor(){
 		super()
 			this.state = {
@@ -40,7 +38,6 @@ class Homepage extends Component {
         showEdit: false
 			}
 	}
-
 
 
   handleRegister = (e) => {
@@ -113,23 +110,23 @@ class Homepage extends Component {
   render() {
     return (
       <div className="mainPage">
-        <h1 className="homePage" > This is the homepage !!!!!!!</h1>
-      <Link to ="/map"> Map </Link>
+        <h1 className="homePage" > This is the homepage !!!!!!! </h1>
+      <Link className="map" to ="/map"> Map </Link>
         {this.state.showRegister && (
-      <Register
-        getPins={this.getPins}
-        handleRegister={this.handleRegister}
-      />
-    )}
-      
+        <Register
+          getPins={this.getPins}
+          handleRegister={this.handleRegister}
+        />
+      )}
+    
       {this.state.showLogin && (
         <Login
           closeLoginPopup={this.closeLoginPopup}
           getPins={this.getPins}
           handleLogin={this.handleLogin}
         />
-          
       )}
+          
         <BiXCircle
           className="loginCancel"
           onClick={this.props.closeLoginPopup}

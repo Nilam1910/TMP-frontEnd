@@ -4,6 +4,8 @@ import Map, {Marker, Popup} from 'react-map-gl';
 import Login from "./components/Login"
 import Register from "./components/Register"
 import NewForm from "./components/NewForm"
+import EditPin from "./components/EditPin"
+import { BiStar } from "react-icons/bi"
 
 
 
@@ -34,7 +36,8 @@ class App extends Component {
         showLogout: false,
         currentLocation: null,
         showRegister: false,
-        showEdit: false
+        showEdit: false,
+        pinindex: null
 			}
 	}
   // componentDidMount - runs only once when the comp is mounted for the first time
@@ -187,16 +190,16 @@ class App extends Component {
     });
   }
 
-  handleAddPin = (pin) => {
-    console.log("handleAddFormWorking")
-    const copyPins = [...this.state.pins]
-    copyPins.unshift(pin)
-    this.setState({
-      pins: copyPins,
-      showPopup: false,
-      showForm: false
-    })
-  }
+  // handleAddPin = (pin) => {
+  //   console.log("handleAddFormWorking")
+  //   const copyPins = [...this.state.pins]
+  //   copyPins.unshift(pin)
+  //   this.setState({
+  //     pins: copyPins,
+  //     showPopup: false,
+  //     showForm: false
+  //   })
+  // }
 
   showFormPopup = () => {
     console.log("form popup triggered")
@@ -212,49 +215,20 @@ class App extends Component {
     })
   }
 
-  showEditPopup = () => {
+  showEditPopup = (e, index) => {
     console.log("form popup triggered")
+    console.log(index)
     this.setState({
-      showEdit: true
+      showEdit: true,
+      pinindex: index
     })
   }
 
   closeEditPopup = () => {
     console.log("form popup closed")
     this.setState({
-      showEdit: false
-    })
-  }
-
-    editPin = (e, id) => {
-      e.preventDefault()
-    fetch(baseURL +'/pins/' + id, {
-      method: 'PUT',
-      body: JSON.stringify({
-        title: e.target.title.value,
-        description: e.target.description.value,
-        rating: parseFloat(e.target.rating.value),
-        longitude: parseFloat(e.target.longitude.value),
-        latitude: parseFloat(e.target.latitude.value)
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then (res => {
-      if(res.ok) return res.json()
-    })
-    .then (resJson => {
-      console.log("EditPin - resJson", resJson)
-      this.handleEdit(resJson)
-    })
-  }
-
-  handleEdit = (pin) => {
-    console.log("handleEditFormWorking")
-    const copyPins = [...this.state.pins]
-    copyPins.unshift(pin)
-    this.setState({
-      pins: copyPins,
+      showEdit: false,
+      pinindex: null
     })
   }
 
@@ -274,7 +248,7 @@ class App extends Component {
           {this.state.pins.map((pins, index) => {
             // console.log(pins)
             return (
-            <div key={pins._id}>
+              <div key={pins._id}>
                 <Marker
                   longitude={pins.longitude}
                   latitude={pins.latitude}
@@ -283,7 +257,7 @@ class App extends Component {
                   onClick={() => this.handlePopUp(pins._id, pins.latitude, pins.longitude)}
                 >
                 </Marker>
-                 {console.log("showPopup", this.state.showPopup)}
+
                 {pins._id === this.state.currentLocation && (
                 <Popup
                  longitude={pins.longitude}
@@ -295,51 +269,58 @@ class App extends Component {
                  >
                   <div className ="card">
                     <label> Place </label>
-                      <h4 className="place"> {pins.title} </h4>
+                    <h4 className="place"> {pins.title} </h4>
                     <label> Review </label>
-                      <p className="desc"> {pins.description}</p>
+                    <p className="desc"> {pins.description}</p>
                     <label> Rating </label>
+                    <div className="stars">
+                    {Array(pins.rating).fill(<BiStar className="star" />)}
+
+                    </div>
                     <label> Information</label>
-                      <span className="username"> Created by: <b> {pins.username}</b></span>
+                    <span className="username"> Created by: <b> {pins.username}</b></span>
+                    <span className="date"> Created When: <b> {pins.createdAt}</b> </span>
                   </div>
-                    <button
-                    className="buttonDelete"
-                    onClick={() => this.deletePin(pins._id)}
-                    >
-                      Delete Pin
-                    </button>
+                  <button
+                  className="buttonDelete"
+                  onClick={() => this.deletePin(pins._id)}
+                  >
+                  Delete Pin
+                  </button>
+                  <button
+                    className="buttonEdit"
+                    onClick={(e) => {this.showEditPopup(e, index)}}
+                  >
+                    Edit Pin
+                  </button>
                 </Popup>
               )}
-            </div>
-          )
+              </div>
+        )
       })}
       <div className="buttons">
-        <button
-        className="button login"
-        onClick={this.showFormPopup}
-        >
-          Add Pin
-        </button>
-
-        <button
-          className="button login"
-          onClick={this.showLoginPopup}
-        >
-          Log in
-        </button>
-
-        <button className="button register" onClick={this.showRegisterPopup}>
-          Register
-        </button>
-
-        <button
-          className="button logout"
-          onClick={this.handleLogOut}
-        >
-          Log out
-        </button>
+      <button
+      className="button login"
+      onClick={this.showFormPopup}
+      >
+        Add Pin
+      </button>
+      <button
+      className="button login"
+      onClick={this.showLoginPopup}
+      >
+      Log in
+      </button>
+      <button className="button register" onClick={this.showRegisterPopup}>
+      Register
+      </button>
+      <button
+      className="button logout"
+      onClick={this.handleLogOut}
+      >
+      Log out
+      </button>
       </div>
-
       {this.state.showLogin && (
         <Login
         closeLoginPopup={this.closeLoginPopup}
@@ -347,23 +328,30 @@ class App extends Component {
         handleLogin={this.handleLogin}
         handleLogOut={this.handleLogOut}
         />
-      )}
+        )}
 
       {this.state.showRegister && (
-        <Register
-        closeRegisterPopup={this.closeRegisterPopup}
-        getPins={this.getPins}
-        handleRegister={this.handleRegister}
-        />
+      <Register
+      closeRegisterPopup={this.closeRegisterPopup}
+      getPins={this.getPins}
+      handleRegister={this.handleRegister}
+      />
       )}
-
       {this.state.showForm && (
         <NewForm
         handleAddPin={this.handleAddPin}
         closeFormPopup={this.closeFormPopup}
-          />
-      )}
-     
+        />
+     )}
+      {this.state.showEdit && (
+      <EditPin
+      pinindex={this.state.pinindex}
+      pins={this.state.pins}
+      editPin={this.state.editPin}
+      handleEdit={this.handleEdit}
+      closeEditPopup={this.closeEditPopup}
+        />
+    )}
       </Map>
     </div>
     );
