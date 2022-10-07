@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
-import {  Link } from "react-router-dom"
+import {Router, Link , Navigate, } from "react-router-dom"
+import "./components/login.css"
+import "./homePage.css"
 import Register from './components/Register'
-import {  BiXCircle } from "react-icons/bi";
+import Login from "./components/Login"
+import {BiXCircle } from "react-icons/bi";
 
 import "./homePage.css"
 
@@ -18,7 +21,9 @@ import "./homePage.css"
 
 
 
+
 class Homepage extends Component {
+
   constructor(){
 		super()
 			this.state = {
@@ -35,7 +40,7 @@ class Homepage extends Component {
         setCurrentUser: null ,
         showLogout: false,
         currentLocation: null,
-        showRegister: true,
+        showRegister: false,
         showEdit: false
 			}
 	}
@@ -57,6 +62,35 @@ class Homepage extends Component {
 
   render() {
     return (
+      <div>
+        <h1> This is the homepage !!!!!!!</h1>
+        <Link to ="/map"> Map </Link>
+
+      {/* {this.state.showLogin && (
+        <Login
+        getPins={this.getPins}
+        handleLogin={this.handleLogin}
+        />
+        )} */}
+
+
+
+
+      {this.state.showRegister
+       && (
+      <Register
+      getPins={this.props.getPins}
+      handleRegister={this.props.handleRegister}
+      closeRegisterPopup={this.closeRegisterPopup}
+      showRegisterPopup={this.props.showRegisterPopup}
+
+     />
+     )}
+
+      <button className="button register" onClick={this.showRegisterPopup}>
+      Register
+      </button>
+
       <div className="mainPage">
         <h1 className="homePage" > This is the homepage !!!!!!! </h1>
       <Link className="map" to ="/map"> Map </Link>
@@ -80,9 +114,11 @@ class Homepage extends Component {
           onClick={this.props.closeLoginPopup}
          />
       </div>
+
+
+
     )
   }
 }
 
 export default Homepage
-

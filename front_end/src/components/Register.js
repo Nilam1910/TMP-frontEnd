@@ -22,10 +22,10 @@ class Register extends Component {
       setError: false,
       navigate: true,
       user: false,
-      showRegister: true
+      showRegister: true,
     }
   }
-    
+
   getPins = () => {
 		fetch(baseURL + '/pins')
 			.then(res => {
@@ -76,10 +76,30 @@ class Register extends Component {
     })
   }
 
+
+  showRegisterPopup = () => {
+    console.log("register popup triggered")
+    this.setState({
+      showRegister: true
+    })
+  }
+
+  closeRegisterPopup = () => {
+    console.log("register popup closed")
+    this.setState({
+      showRegister: false
+    })
+  }
+
+
+
+
+
+
   render() {
     return (
-      
-      <div className="registerContainer"> 
+
+      <div className="registerContainer">
         {this.state.user && (<Navigate to ="/map" />)}
           <div className="logo">
             Travel Pins
@@ -94,15 +114,18 @@ class Register extends Component {
             <input id="password" name="password" className="password" type="password" placeholder="password" />
           <input className="registerButton" type="submit" value="Register" />
         </form>
-          <BiXCircle
+
+        <BiXCircle
             className="loginCancel"
-            onClick={this.props.closeLoginPopup}
+            onClick={this.props.closeRegisterPopup}
+
           />
+
       </div>
     )
   }
 }
-       
+
 
 export default Register
 
