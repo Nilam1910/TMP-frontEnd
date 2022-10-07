@@ -62,6 +62,19 @@ class Register extends Component {
       })
     })
   }
+  showRegisterPopup = () => {
+    console.log("register popup triggered")
+    this.setState({
+      showRegister: true
+    })
+  }
+
+  closeRegisterPopup = () => {
+    console.log("register popup closed")
+    this.setState({
+      showRegister: false
+    })
+  }
 
 
   showRegisterPopup = () => {
@@ -115,3 +128,18 @@ class Register extends Component {
 
 
 export default Register
+
+
+
+
+
+
+
+  
+
+ 
+
+
+
+
+

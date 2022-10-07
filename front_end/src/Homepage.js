@@ -6,6 +6,7 @@ import Register from './components/Register'
 import Login from "./components/Login"
 import {BiXCircle } from "react-icons/bi";
 
+import "./homePage.css"
 
 
 
@@ -58,6 +59,7 @@ class Homepage extends Component {
     })
   }
 
+
   render() {
     return (
       <div>
@@ -89,6 +91,28 @@ class Homepage extends Component {
       Register
       </button>
 
+      <div className="mainPage">
+        <h1 className="homePage" > This is the homepage !!!!!!! </h1>
+      <Link className="map" to ="/map"> Map </Link>
+
+        {this.state.showRegister && (
+        <Register
+          getPins={this.getPins}
+          handleRegister={this.handleRegister}
+          closeRegisterPopup={this.closeRegisterPopup}
+          showRegisterPopup={this.props.showRegisterPopup}
+        />
+      )}
+    
+     
+       <button className="button register" onClick={this.showRegisterPopup}>
+        Register
+      </button>
+          
+        <BiXCircle
+          className="loginCancel"
+          onClick={this.props.closeLoginPopup}
+         />
       </div>
 
 
