@@ -38,7 +38,7 @@ import "./login.css"
             <label className="password" htmlFor="name">Password: </label>
               <input id="password" name="password" className="password" type="password" placeholder="password" />
               <input className="loginButton" type="submit" value="Login" />
-              <input className="loginButton" type="submit" value="Register"/>
+           
 
           </form>
             <Cancel

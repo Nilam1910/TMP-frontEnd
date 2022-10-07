@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import App from "./App"
-import {Router, Link} from "react-router-dom"
+import {Router, Link , Navigate, } from "react-router-dom"
 import "./components/login.css"
 import Login from './components/Login'
 import Register from './components/Register'
@@ -20,6 +20,7 @@ console.log("Current base URL: ", baseURL)
 
 
 class Homepage extends Component {
+
   constructor(){
 		super()
 			this.state = {
@@ -45,6 +46,7 @@ class Homepage extends Component {
  
 
   handleRegister = (e) => {
+    e.preventDefault()
     console.log("etarget", e.target)
     fetch(baseURL + '/users/register', {
       method: 'POST',
@@ -60,14 +62,15 @@ class Homepage extends Component {
     .then(resJson => {
       console.log(resJson)
       this.getPins()
-    })
-    this.setState({
+    
      
     })
   }
+  
 
 
   handleLogin = (e) => {
+
     e.preventDefault()
     console.log("etarget", e.target.username.value, e.target.email.value, e.target.password.value)
     console.log(baseURL)
@@ -88,6 +91,7 @@ class Homepage extends Component {
       .then(resJson => {
       console.log("resjson", resJson)
       this.getPins()
+      
     })
    
   }
@@ -129,14 +133,23 @@ class Homepage extends Component {
         />
         )} */}
 
-      {this.state.showRegister && (
+      {this.state.showRegister
+       && (
       <Register
       // closeRegisterPopup={this.closeRegisterPopup}
       getPins={this.getPins}
       handleRegister={this.handleRegister}
-      handleLogin={this.handleLogin}
+      
       />
     )}
+     {this.state.showLogin && (
+        <Login
+        closeLoginPopup={this.closeLoginPopup}
+        getPins={this.getPins}
+        handleLogin={this.handleLogin}
+        
+        />
+        )}
      
       
       </div>
