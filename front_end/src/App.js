@@ -190,16 +190,7 @@ class App extends Component {
     });
   }
 
-  // handleAddPin = (pin) => {
-  //   console.log("handleAddFormWorking")
-  //   const copyPins = [...this.state.pins]
-  //   copyPins.unshift(pin)
-  //   this.setState({
-  //     pins: copyPins,
-  //     showPopup: false,
-  //     showForm: false
-  //   })
-  // }
+
 
   showFormPopup = () => {
     console.log("form popup triggered")
