@@ -23,6 +23,7 @@ class Register extends Component {
       navigate: true,
       user: false,
       showRegister: true,
+      showLogin: false,
     }
   }
     
@@ -67,14 +68,16 @@ class Register extends Component {
   showRegisterPopup = () => {
     console.log("register popup triggered")
     this.setState({
-      showRegister: true
+      showRegister: true,
+      showLogin: false
     })
   }
 
   closeRegisterPopup = () => {
     console.log("register popup closed")
     this.setState({
-      showRegister: false
+      showRegister: false,
+      showLogin: true
     })
   }
 

@@ -34,7 +34,7 @@ class Homepage extends Component {
           zoom: 4
         },
         showPopup: false,
-        showLogin: false,
+        showLogin: true,
         setCurrentUser: null ,
         showLogout: false,
         currentLocation: null,
@@ -46,7 +46,8 @@ class Homepage extends Component {
   showRegisterPopup = () => {
     console.log("register popup triggered")
     this.setState({
-      showRegister: true
+      showRegister: true,
+      showLogin:false
     })
   }
 
@@ -57,10 +58,28 @@ class Homepage extends Component {
     })
   }
 
+  closeLoginPopup = () => {
+    console.log("login popup closed")
+    this.setState({
+      showLogin: false,
+
+    
+    
+    })
+  }
+
+  showLoginPopup = () => {
+    console.log("login popup triggered")
+    this.setState({
+      showLogin: true,
+      showRegister: false
+    })
+  }
+
   render() {
     return (
       <div>
-        <h1> This is the homepage !!!!!!!</h1>
+        <h1> Welcome To Travel Pins</h1>
         <Link to ="/map"> Map </Link>
       
       {/* {this.state.showLogin && (
@@ -83,11 +102,27 @@ class Homepage extends Component {
 
      />
      )}
+      {this.state.showLogin && (
+        <Login
+        closeLoginPopup={this.closeLoginPopup}
+        getPins={this.props.getPins}
+        handleLogin={this.props.handleLogin}
+        handleLogOut={this.props.handleLogOut}
+        showLoginPopup={this.props.showLoginPopup}
+        
+        />
+      )}
+
+
     
       <button className="button register" onClick={this.showRegisterPopup}>
       Register
       </button>
     
+      <button className="button register" onClick={this.showLoginPopup}>
+      Login
+      </button>
+
       </div>
      
       
