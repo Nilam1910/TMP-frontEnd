@@ -56,7 +56,7 @@ class App extends Component {
 				this.setState({pins: data.pins})
 			})
 	}
-
+  // checking heroku
   handleViewportChange = viewport => {
     this.setState({
       viewport: { ...this.state.viewport, ...viewport }
