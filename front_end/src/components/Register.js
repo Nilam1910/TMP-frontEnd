@@ -1,5 +1,5 @@
 import "./register.css"
-import {Room }from '@material-ui/icons';
+
 import React, { Component } from 'react'
 
 
@@ -23,11 +23,10 @@ class Register extends Component {
     }
   }
 
-      render() {
-      return (
+  render() {
+    return (
       <div className="registerContainer">
         <div className="logo">
-        <Room />
           Travel Pins
         </div>
           <h1 className="h1-register">CREATE AN ACCOUNT</h1>
@@ -43,10 +42,7 @@ class Register extends Component {
             <form onSubmit={this.props.handleLogin} action="/map">
               <input  className="registerButton" type="submit" value="Login" />
             </form>
-        {/* <Cancel
-        className="registerCancel"
-        onClick={this.props.closeRegisterPopup}
-        /> */}
+              
       </div>
     )
   }

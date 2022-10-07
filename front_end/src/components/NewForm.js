@@ -1,5 +1,5 @@
 import "./newform.css"
-import { Room,Cancel } from '@material-ui/icons'
+
 import React, { Component } from 'react'
 
 
@@ -49,10 +49,9 @@ class NewForm extends Component {
   render() {
     return (
       <div className="formContainer">
-      <div className="logo">
-      <Room />
-      Travel Pins
-      </div>
+        <div className="logo">
+          Travel Pins
+        </div>
       <h1 className="h1-register">CREATE A PIN</h1>
         <form onSubmit={this.handleSubmit}>
           <label className="label1" htmlFor="username"> UserName: </label>
@@ -62,7 +61,7 @@ class NewForm extends Component {
               id="name"
               name="username"
               placeholder="Enter Username"
-          />
+            />
           <label className="label1" htmlFor="title"> Title: </label>
             <input
               className="username"
@@ -78,34 +77,31 @@ class NewForm extends Component {
               id="description"
               name="description"
               placeholder="enter a description of your trip!"
-          />
+            />
           <label className="label1" htmlFor="rating"> Rating: </label>
-          <input
+            <input
             className="username"
             id="rating"
             name="rating"
             placeholder="enter your rating "
-        />
+            />
           <label className="label1" htmlFor="longitude"> Longitude: </label>
             <input
               className="username"
               id="longitude"
               name="longitude"
               placeholder="enter the longitude"
-          />
+            />
           <label className="label1" htmlFor="latitude"> Latitude: </label>
             <input
               className="username"
               id="latitude"
               name="latitude"
               placeholder="enter the latitude"
-          />
+            />
             <input type="submit" value="Create a Pin" />
             <input type="submit" value="Edit in Pin" />
-            <Cancel
-            className="registerCancel"
-            onClick={this.props.closeFormPopup}
-            />
+              
         </form>
       </div>
     )

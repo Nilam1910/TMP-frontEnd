@@ -1,12 +1,10 @@
 import './App.css';
 import React, { Component} from 'react'
 import Map, {Marker, Popup} from 'react-map-gl';
-import {Star}from '@material-ui/icons';
-import { format } from 'timeago.js';
 import Login from "./components/Login"
 import Register from "./components/Register"
 import NewForm from "./components/NewForm"
-// import EditPin from "./components/EditPin"
+
 
 
 let baseURL = ""
@@ -64,10 +62,6 @@ class App extends Component {
     })
   }
 
-
-  // handlePopupThree = (id) => {
-  //   currentlocation(id)
-  // }
 
   handlePopUp = (id) => {
     console.log("handle popup triggered")
@@ -291,7 +285,7 @@ handleLogin = (e) => {
                   onClick={() => this.handlePopUp(pins._id, pins.latitude, pins.longitude)}
                 >
                 </Marker>
-                // {console.log("showpopup", this.state.showPopup)}
+                 {console.log("showpopup", this.state.showPopup)}
                 {pins._id === this.state.currentLocation && (
                 <Popup
                  longitude={pins.longitude}
@@ -308,12 +302,12 @@ handleLogin = (e) => {
                     <p className="desc"> {pins.description}</p>
                     <label> Rating </label>
                     <div className="stars">
-                    {Array(pins.rating).fill(<Star className="star" />)}
+                    {/* {Array(pins.rating).fill(<Star className="star" />)} */}
 
                     </div>
                     <label> Information</label>
                     <span className="username"> Created by: <b> {pins.username}</b></span>
-                    <span className="date"> Created When: <b> {format(pins.createdAt)}</b> </span>
+                  
                   </div>
                   <button
                   className="buttonDelete"
@@ -372,27 +366,16 @@ handleLogin = (e) => {
       />
     )}
     {this.state.showForm && (
-    <NewForm
-    handleAddPin={this.handleAddPin}
-    closeFormPopup={this.closeFormPopup}
-      />
+      <NewForm
+      handleAddPin={this.handleAddPin}
+      closeFormPopup={this.closeFormPopup}
+        />
     )}
-    {/* {this.state.showEdit && (
-    <EditPin
-    editPin={this.editPin}
-    handleEdit={this.handleEdit}
-    closeEditPopup={this.closeEditPopup}
-      />
-    )} */}
+     
       </Map>
     </div>
 );
 }
 }
-
-// comment //
-// some thing testig
-// I added the Popup
-
 
 export default App

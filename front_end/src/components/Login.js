@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Cancel , Room} from "@material-ui/icons"
+
 import "./login.css"
 
   let baseURL = ""
@@ -26,7 +26,6 @@ import "./login.css"
     return (
       <div className = "loginContainer">
         <div className = "logo">
-        <Room />
             Travel Pins
         </div>
         <h1 className="h1-login">Log In</h1>
@@ -39,16 +38,9 @@ import "./login.css"
               <input id="password" name="password" className="password" type="password" placeholder="password" />
               <input className="loginButton" type="submit" value="Login" />
               <input className="loginButton" type="submit" value="Register"/>
-
           </form>
-            <Cancel
-            className="loginCancel"
-            onClick={this.props.closeLoginPopup}
-            />
-            
+           
       </div>
-
-
     )
   }
 }
