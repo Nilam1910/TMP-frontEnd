@@ -3,19 +3,19 @@ import {Router, Link , Navigate, } from "react-router-dom"
 import "./components/login.css"
 import Register from './components/Register'
 import Login from "./components/Login"
-import {  BiXCircle } from "react-icons/bi";
+import {BiXCircle } from "react-icons/bi";
 
 
 
 
-let baseURL = ""
+  let baseURL = ""
 
-if(process.env.NODE_ENV === "development"){
-  baseURL = "http://localhost:3001"
-} else {
-  baseURL = `${process.env.REACT_APP_BACKEND_URL}/pins`
-}
-console.log("Current base URL: ", baseURL)
+  if(process.env.NODE_ENV === "development"){
+    baseURL = "http://localhost:3001"
+  } else {
+    baseURL = `${process.env.REACT_APP_BACKEND_URL}/pins`
+  }
+  console.log("Current base URL: ", baseURL)
 
 
 

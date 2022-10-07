@@ -5,6 +5,7 @@
   "dependencies": {
     "dotenv": "^16.0.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "icons": "^1.0.0",
     "mapbox-gl": "^2.10.0",
     "react": "^18.2.0",
     "react-icons": "^4.4.0",

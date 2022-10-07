@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-
 import "./login.css"
+import {  BiXCircle } from "react-icons/bi";
 
   let baseURL = ""
 
@@ -28,7 +28,7 @@ import "./login.css"
         <div className = "logo">
             Travel Pins
         </div>
-        <h1 className="h1-login">Log In</h1>
+            <h1 className="h1-login">Log In</h1>
           <form onSubmit={this.props.handleLogin} action= "/map">
             <label className="label1" htmlFor="name">Username: </label>
               <input id="username" name="username" className="username" type="text" placeholder="username" />
@@ -37,16 +37,15 @@ import "./login.css"
             <label className="password" htmlFor="name">Password: </label>
               <input id="password" name="password" className="password" type="password" placeholder="password" />
               <input className="loginButton" type="submit" value="Login" />
-           
-
           </form>
-           
+            <BiXCircle
+              className="loginCancel"
+              onClick={this.props.closeLoginPopup}
+            />
       </div>
     )
   }
 }
-
-
 
 
 export default Login
