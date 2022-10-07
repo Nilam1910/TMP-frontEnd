@@ -72,9 +72,8 @@ input::placeholder, textarea::placeholder {
 
 .pin {
   cursor: pointer;
-  
 }
-
+  
 .button {
     border: none;
     padding: 5px;

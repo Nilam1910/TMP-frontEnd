@@ -26,7 +26,7 @@ class Register extends Component {
       showLogin: false,
     }
   }
-    
+
   getPins = () => {
 		fetch(baseURL + '/pins')
 			.then(res => {
@@ -63,6 +63,39 @@ class Register extends Component {
       })
     })
   }
+  showRegisterPopup = () => {
+    console.log("register popup triggered")
+    this.setState({
+      showRegister: true
+    })
+  }
+
+  closeRegisterPopup = () => {
+    console.log("register popup closed")
+    this.setState({
+      showRegister: false
+    })
+  }
+
+
+  showRegisterPopup = () => {
+    console.log("register popup triggered")
+    this.setState({
+      showRegister: true
+    })
+  }
+
+  closeRegisterPopup = () => {
+    console.log("register popup closed")
+    this.setState({
+      showRegister: false
+    })
+  }
+
+
+
+
+
 
 
   showRegisterPopup = () => {
@@ -88,8 +121,8 @@ class Register extends Component {
 
   render() {
     return (
-      
-      <div className="registerContainer"> 
+
+      <div className="registerContainer">
         {this.state.user && (<Navigate to ="/map" />)}
           <div className="logo">
             Travel Pins
@@ -115,6 +148,6 @@ class Register extends Component {
     )
   }
 }
-       
+
 
 export default Register

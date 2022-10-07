@@ -15,7 +15,7 @@ root.render(
         <Route path = "/map" element = {<App />} />
       </Routes>
     </BrowserRouter>
-    
+
   </React.StrictMode>
 );
 

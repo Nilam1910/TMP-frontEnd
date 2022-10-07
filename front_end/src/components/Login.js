@@ -27,6 +27,22 @@ import {Navigate } from "react-router-dom"
       }
     }
 
+
+
+  getPins = () => {
+		fetch(baseURL + '/pins')
+			.then(res => {
+				if(res.status === 200) {
+					return res.json()
+				} else {
+					return []
+				}
+			}).then(data => {
+				console.log('data', data)
+				this.setState({pins: data.pins})
+			})
+	}
+
     closeLoginPopup = () => {
       console.log("login popup closed")
       this.setState({

@@ -76,6 +76,14 @@ class Homepage extends Component {
     })
   }
 
+  closeRegisterPopup = () => {
+    console.log("register popup closed")
+    this.setState({
+      showRegister: false
+    })
+  }
+
+
   render() {
     return (
       <div>
