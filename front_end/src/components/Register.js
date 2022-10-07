@@ -1,17 +1,16 @@
 import "./register.css"
-
 import React, { Component } from 'react'
-
 import {Navigate } from "react-router-dom"
+import {  BiXCircle } from "react-icons/bi";
 
-let baseURL = ""
+  let baseURL = ""
 
-if(process.env.NODE_ENV === "development"){
-  baseURL = "http://localhost:3001"
-} else {
-  baseURL = `${process.env.REACT_APP_BACKEND_URL}/pins`
-}
-console.log("Current base URL: ", baseURL)
+  if(process.env.NODE_ENV === "development"){
+    baseURL = "http://localhost:3001"
+  } else {
+    baseURL = `${process.env.REACT_APP_BACKEND_URL}/pins`
+  }
+  console.log("Current base URL: ", baseURL)
 
 class Register extends Component {
   constructor(props){
@@ -22,11 +21,10 @@ class Register extends Component {
       error: false,
       setError: false,
       navigate: true,
-   
-      
+      user: false,
     }
-  
   }
+    
   getPins = () => {
 		fetch(baseURL + '/pins')
 			.then(res => {
@@ -41,12 +39,9 @@ class Register extends Component {
 			})
 	}
 
- 
-
   handleRegister = (e) => {
     e.preventDefault()
-    const navigate= Navigate()
-    console.log("etarget", e.target)
+    console.log("eTarget", e.target)
     fetch(baseURL + '/users/register', {
       method: 'POST',
       body: JSON.stringify({
@@ -60,39 +55,39 @@ class Register extends Component {
     }).then(res => res.json())
     .then(resJson => {
       console.log(resJson)
-      this.state.navigate("/map")
       this.getPins()
-      navigate("/map")
-      
-      
-      
-     
+      this.setState({
+        user:true
+      })
     })
   }
-  
 
   render() {
     return (
       
-      <div className="registerContainer">
-        <div className="logo">AS
-        Travel Pins
-        </div>
+      <div className="registerContainer"> 
+        {this.state.user && (<Navigate to ="/map" />)}
+          <div className="logo">
+            Travel Pins
+          </div>
         <h1 className="h1-register">CREATE AN ACCOUNT</h1>
-        <form  onSubmit={this.props.handleRegister}  action="/" method="POST">
+        <form  onSubmit={this.handleRegister} >
           <label className="label1" htmlFor="name">Username: </label>
-          <input id="username" name="username" className="username" type="text" placeholder="username" />
+            <input id="username" name="username" className="username" type="text" placeholder="username" />
           <label className="label1" htmlFor="name">Email: </label>
-          <input  id="email" name="email" className="email" type="email" placeholder="email" />
+            <input  id="email" name="email" className="email" type="email" placeholder="email" />
           <label className="" htmlFor="name">Password: </label>
-          <input id="password" name="password" className="password" type="password" placeholder="password" />
+            <input id="password" name="password" className="password" type="password" placeholder="password" />
           <input className="registerButton" type="submit" value="Register" />
-         
         </form>
-       
+          <BiXCircle
+            className="loginCancel"
+            onClick={this.props.closeLoginPopup}
+          />
       </div>
     )
   }
 }
+       
 
 export default Register

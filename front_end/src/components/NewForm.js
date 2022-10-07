@@ -1,6 +1,7 @@
-import "./newform.css"
-
+import "./newForm.css"
 import React, { Component } from 'react'
+import {  BiXCircle } from "react-icons/bi";
+
 
 
 class NewForm extends Component {
@@ -12,16 +13,17 @@ class NewForm extends Component {
        description: "",
        rating: "",
        longitude: "",
-       latitude:""
+       latitude:"",
+      
      }
    }
    componentsDidMount(){ // this one use to check the handleSubmit is working // only oneTime
     this.handleSubmit()
     this.handleChange() // we don't need to use fat arrow because its part of inheritance,or other way because its already bind that level of component // or because its called from this component like handleSubmit
   }
-  // call this function on every keystroke (every creation)
+    // call this function on every keystroke (every creation)
 
-  //  call this function when the user submits the form (handleSubmit do create the new item we handle over new form its responsibility to post that form in backend)(in form we doing post method)
+    //  call this function when the user submits the form (handleSubmit do create the new item we handle over new form its responsibility to post that form in backend)(in form we doing post method)
    handleSubmit = (e) => {
       e.preventDefault();
       fetch(`${process.env.REACT_APP_BACKEND_URL}/pins`, {
@@ -46,15 +48,22 @@ class NewForm extends Component {
           // this.props.handleEditPin(resJson)
         })
       }
+      // closeLoginPopup = () => {
+      //   console.log("login popup closed")
+      //   this.setState({
+      //     showLogin: false
+      //   })
+      // }
   render() {
     return (
       <div className="formContainer">
         <div className="logo">
           Travel Pins
         </div>
-      <h1 className="h1-register">CREATE A PIN</h1>
+          <p className="h1-register">CREATE A PIN</p>
         <form onSubmit={this.handleSubmit}>
-          <label className="label1" htmlFor="username"> UserName: </label>
+
+          <label className="label" htmlFor="username"> UserName: </label>
             <input
               className="username"
               type="text"
@@ -99,13 +108,17 @@ class NewForm extends Component {
               name="latitude"
               placeholder="enter the latitude"
             />
-            <input type="submit" value="Create a Pin" />
-            <input type="submit" value="Edit in Pin" />
-              
-        </form>
+            <input class ="create" type="submit" value="Create a Pin" /> 
+          </form>
+              <BiXCircle
+                className="loginCancel"
+                onClick={this.props.closeLoginPopup}
+              />  
+
       </div>
     )
   }
 }
-// creating the a things the database going to send a things back to us amd now that it exists in the database so i we have to pass it to the app an the app will take a responsibility of updating state to do that we need mechanism for app to take on the responsibility
+// creating the a things the database going to send a things back to us and now that it exists in the database so i we have to pass it to the app an the app will take a responsibility of updating state to do that we need mechanism for app to take on the responsibility
+
 export default NewForm

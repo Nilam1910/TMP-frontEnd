@@ -2,17 +2,18 @@ import React, { Component } from 'react'
 import { Link  } from "react-router-dom"
 import Register from './components/Register'
 import Login from "./components/Login"
+import {  BiXCircle } from "react-icons/bi";
 
 
 
-let baseURL = ""
+  let baseURL = ""
 
-if(process.env.NODE_ENV === "development"){
-  baseURL = "http://localhost:3001"
-} else {
-  baseURL = `${process.env.REACT_APP_BACKEND_URL}/pins`
-}
-console.log("Current base URL: ", baseURL)
+  if(process.env.NODE_ENV === "development"){
+    baseURL = "http://localhost:3001"
+  } else {
+    baseURL = `${process.env.REACT_APP_BACKEND_URL}/pins`
+  }
+  console.log("Current base URL: ", baseURL)
 
 
 
@@ -41,11 +42,10 @@ class Homepage extends Component {
 	}
 
 
- 
 
   handleRegister = (e) => {
     e.preventDefault()
-    console.log("etarget", e.target)
+    console.log("eTarget", e.target)
     fetch(baseURL + '/users/register', {
       method: 'POST',
       body: JSON.stringify({
@@ -60,15 +60,10 @@ class Homepage extends Component {
     .then(resJson => {
       console.log(resJson)
       this.getPins()
-    
-     
     })
   }
-  
-
 
   handleLogin = (e) => {
-
     e.preventDefault()
     console.log("eTarget", e.target.username.value, e.target.email.value, e.target.password.value)
     console.log(baseURL)
@@ -115,34 +110,30 @@ class Homepage extends Component {
     })
   }
 
-
-
-
   render() {
     return (
-      <div>
-        <h1> This is the homepage !!!!!!!</h1>
-        <Link to ="/map"> Map </Link>
-
-      {this.state.showRegister
-       && (
+      <div className="mainPage">
+        <h1 className="homePage" > This is the homepage !!!!!!!</h1>
+      <Link to ="/map"> Map </Link>
+        {this.state.showRegister && (
       <Register
-      // closeRegisterPopup={this.closeRegisterPopup}
-      getPins={this.getPins}
-      handleRegister={this.handleRegister}
-      
+        getPins={this.getPins}
+        handleRegister={this.handleRegister}
       />
     )}
-     {this.state.showLogin && (
-        <Login
-        closeLoginPopup={this.closeLoginPopup}
-        getPins={this.getPins}
-        handleLogin={this.handleLogin}
-        
-        />
-        )}
-     
       
+      {this.state.showLogin && (
+        <Login
+          closeLoginPopup={this.closeLoginPopup}
+          getPins={this.getPins}
+          handleLogin={this.handleLogin}
+        />
+          
+      )}
+        <BiXCircle
+          className="loginCancel"
+          onClick={this.props.closeLoginPopup}
+         />
       </div>
     )
   }
