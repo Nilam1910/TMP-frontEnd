@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Cancel , Room} from "@material-ui/icons"
+
 import "./login.css"
 
   let baseURL = ""
@@ -7,7 +7,7 @@ import "./login.css"
     if(process.env.NODE_ENV === "development"){
     baseURL = "http://localhost:3001"
     } else {
-    baseURL = "Your heroku backend url here"
+    baseURL = `${process.env.REACT_APP_BACKEND_URL}/pins`
     }
     console.log("Current base URL: ", baseURL)
 
@@ -26,7 +26,6 @@ import "./login.css"
     return (
       <div className = "loginContainer">
         <div className = "logo">
-        <Room />
             Travel Pins
         </div>
         <h1 className="h1-login">Log In</h1>
@@ -41,14 +40,8 @@ import "./login.css"
            
 
           </form>
-            <Cancel
-            className="loginCancel"
-            onClick={this.props.closeLoginPopup}
-            />
-            
+           
       </div>
-
-
     )
   }
 }

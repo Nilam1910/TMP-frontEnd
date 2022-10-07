@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import App from "./App"
 import {Router, Link , Navigate, } from "react-router-dom"
 import "./components/login.css"
-import Login from './components/Login'
 import Register from './components/Register'
 
 
@@ -12,7 +11,7 @@ let baseURL = ""
 if(process.env.NODE_ENV === "development"){
   baseURL = "http://localhost:3001"
 } else {
-  baseURL = "Your heroku backend url here"
+  baseURL = `${process.env.REACT_APP_BACKEND_URL}/pins`
 }
 console.log("Current base URL: ", baseURL)
 
@@ -72,7 +71,7 @@ class Homepage extends Component {
   handleLogin = (e) => {
 
     e.preventDefault()
-    console.log("etarget", e.target.username.value, e.target.email.value, e.target.password.value)
+    console.log("eTarget", e.target.username.value, e.target.email.value, e.target.password.value)
     console.log(baseURL)
     fetch(baseURL + '/users/signin', {
       method: 'POST',
