@@ -64,7 +64,7 @@ class EditPin extends Component {
               id="title"
               name="title"
               defaultValue={this.state.title}
-              onChange={(e) => this.state.title = e.target.value}
+              onChange={(e) => this.setState.title = e.target.value}
               placeholder="enter a title"
           />
           <label className="label1" htmlFor="description"> Description: </label>
@@ -73,7 +73,7 @@ class EditPin extends Component {
               type="text"
               id="description"
               defaultValue={this.state.description}
-              onChange={(e) => this.state.description = e.target.value}
+              onChange={(e) => this.setState.description = e.target.value}
               name="description"
               placeholder="enter a description of your trip!"
           />
@@ -82,7 +82,7 @@ class EditPin extends Component {
               className="username"
               id="longitude"
               defaultValue={this.state.longitude}
-              onChange={(e) => this.state.longitude = e.target.value}
+              onChange={(e) => this.setState.longitude = e.target.value}
               name="longitude"
               placeholder="enter the longitude"
           />
@@ -90,7 +90,7 @@ class EditPin extends Component {
             <input
               className="username"
               defaultValue={this.state.latitude}
-              onChange={(e) => this.state.latitude = e.target.value}
+              onChange={(e) => this.setState.latitude = e.target.value}
               id="latitude"
               name="latitude"
               placeholder="enter the latitude"

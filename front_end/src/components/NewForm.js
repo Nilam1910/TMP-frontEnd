@@ -1,3 +1,4 @@
+
 import "./newform.css"
 import React, { Component } from 'react'
 import {  BiXCircle } from "react-icons/bi";
@@ -45,10 +46,15 @@ class NewForm extends Component {
         .then (resJson => {
           console.log("NewForm - resJson", resJson)
           this.props.handleAddPin(resJson)
-          
+          // this.props.handleEditPin(resJson)
         })
       }
-     
+      // closeLoginPopup = () => {
+      //   console.log("login popup closed")
+      //   this.setState({
+      //     showLogin: false
+      //   })
+      // }
   render() {
     return (
       <div className="formContainer">
@@ -107,7 +113,7 @@ class NewForm extends Component {
           </form>
               <BiXCircle
                 className="loginCancel"
-                onClick={this.props.closeLoginPopup}
+                onClick={this.props.closeFormPopup}
               />
 
       </div>

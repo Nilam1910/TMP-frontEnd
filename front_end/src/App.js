@@ -3,7 +3,9 @@ import React, { Component} from 'react'
 import Map, {Marker, Popup} from 'react-map-gl';
 import Login from "./components/Login"
 import Register from "./components/Register"
-import { BiStar } from "react-icons/bi"
+import NewForm from "./components/NewForm"
+import EditPin from "./components/EditPin"
+import { BiStar } from "react-icons/bi";
 import {Navigate } from "react-router-dom"
 
 
@@ -221,7 +223,7 @@ class App extends Component {
     console.log(index)
     this.setState({
       showEdit: true,
-      pinindex: index
+      pinindex: index,
     })
   }
 
@@ -275,7 +277,7 @@ class App extends Component {
                     <p className="desc"> {pins.description}</p>
                     <label> Rating </label>
                     <div className="stars">
-                    {Array(pins.rating).fill(<BiStar className="star" />)}
+                      {Array(pins.rating).fill(<BiStar className="star" />)}
                     </div>
                     <label> Information</label>
                     <span className="username"> Created by: <b> {pins.username}</b></span>
@@ -305,9 +307,7 @@ class App extends Component {
       >
         Add Pin
       </button>
-      {this.state.redirect && (<Navigate to ="/" />)}
       <button
-     
       className="button logout"
       onClick={this.handleLogOut}
       >
@@ -324,15 +324,27 @@ class App extends Component {
         )}
 
       {this.state.showRegister && (
-        <Register
-        closeRegisterPopup={this.closeRegisterPopup}
-        getPins={this.getPins}
-        handleRegister={this.handleRegister}
-        />
-      )}
-
-      
-     
+      <Register
+      closeRegisterPopup={this.closeRegisterPopup}
+      getPins={this.getPins}
+      handleRegister={this.handleRegister}
+      />
+    )}
+    {this.state.showForm && (
+    <NewForm
+    handleAddPin={this.handleAddPin}
+    closeFormPopup={this.closeFormPopup}
+      />
+    )}
+    {this.state.showEdit && (
+    <EditPin
+    pinindex={this.state.pinindex}
+    pins={this.state.pins}
+    editPin={this.state.editPin}
+    handleEdit={this.handleEdit}
+    closeEditPopup={this.closeEditPopup}
+      />
+    )}
       </Map>
     </div>
     );
