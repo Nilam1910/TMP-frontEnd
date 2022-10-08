@@ -263,6 +263,7 @@ class App extends Component {
 
                 {pins._id === this.state.currentLocation && (
                 <Popup
+                 className="formPop"
                  longitude={pins.longitude}
                  latitude={pins.latitude}
                  closeButton={true}
@@ -271,18 +272,19 @@ class App extends Component {
                  anchor="left"
                  >
                   <div className ="card">
-                    <label> Place </label>
+                    <label> Place: </label>
                     <h4 className="place"> {pins.title} </h4>
-                    <label> Review </label>
+                    <label> Review: </label>
                     <p className="desc"> {pins.description}</p>
-                    <label> Rating </label>
+                    <label> Rating: </label>
                     <div className="stars">
                       {Array(pins.rating).fill(<BiStar className="star" />)}
                     </div>
-                    <label> Information</label>
+                    <label> Information: </label>
                     <span className="username"> Created by: <b> {pins.username}</b></span>
                     <span className="date"> Created When: <b> {pins.createdAt}</b> </span>
                   </div>
+                  <div className="insideButtons">
                   <button
                   className="buttonDelete"
                   onClick={() => this.deletePin(pins._id)}
@@ -295,6 +297,7 @@ class App extends Component {
                   >
                     Edit Pin
                   </button>
+                  </div>
                 </Popup>
               )}
               </div>
@@ -302,7 +305,7 @@ class App extends Component {
       })}
       <div className="buttons">
       <button
-      className="button login"
+      className="button addPin"
       onClick={this.showFormPopup}
       >
         Add Pin
@@ -314,22 +317,6 @@ class App extends Component {
       Log out
       </button>
       </div>
-      {this.state.showLogin && (
-        <Login
-        closeLoginPopup={this.closeLoginPopup}
-        getPins={this.getPins}
-        handleLogin={this.handleLogin}
-        handleLogOut={this.handleLogOut}
-        />
-        )}
-
-      {this.state.showRegister && (
-      <Register
-      closeRegisterPopup={this.closeRegisterPopup}
-      getPins={this.getPins}
-      handleRegister={this.handleRegister}
-      />
-    )}
     {this.state.showForm && (
     <NewForm
     handleAddPin={this.handleAddPin}

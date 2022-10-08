@@ -15,33 +15,41 @@
    align-items: center;
    justify-content: space-around;
  }
- 
- logo {
+
+ .logo {
    font-size: 30px;
-   color: slateblue;
-   display: flex;
+   color: #30C6D3;
    align-items: center;
-   font-weight: 700;
-   margin-top: 5px;
+   font-weight: 700px;
+   margin-top: -70px;
+   margin-bottom: -140px;
  }
- 
+
  .h1-register {
    font-size: 20px;
+   font-weight: 800;
    margin-top: 0;
    line-height: 1.2;
    color: white;
  }
- 
+
  .username {
-   height: 5vh;
-   border-radius: 5px;
+   margin-bottom: 5px;
  }
- 
- .label1 {
+
+ .label {
    color: white;
    text-decoration: none;
  }
- 
+
+ .edit{
+   margin-top: 25px;
+   font-size:large;
+   border-radius: 10px;
+   background-color: #30C6D3;
+   color: white;
+ }
+
  .registerCancel {
    color: white;
    position: absolute;

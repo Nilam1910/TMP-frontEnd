@@ -6,8 +6,10 @@ App {
   width: max-content;
   height: max-content;
   display: flex;
+  font-size: 15px;
   flex-direction: column;
   justify-content: space-around;
+  align-items: center;
 }
 
 .card:hover{
@@ -16,11 +18,10 @@ App {
 
 label{
   width: max-content;
-  color: blueviolet;
   font-size: 14px;
   font-weight: bold;
-  border-bottom: 2.5px solid rgb(194, 23, 200);
   margin: .5px 0;
+  margin-bottom: 1px;
 }
 
 .desc{
@@ -70,10 +71,7 @@ input::placeholder, textarea::placeholder {
   cursor: pointer;
 }
 
-.pin {
-  cursor: pointer;
-}
-  
+
 .button {
     border: none;
     padding: 5px;
@@ -86,13 +84,9 @@ input::placeholder, textarea::placeholder {
     background-color: tomato;
 }
 
-.login {
-    background-color: teal;
-    margin-right: 10px;
-}
-
-.register {
-    background-color: slateblue;
+.addPin {
+  background-color: teal;
+  margin-right: 10px;
 }
 
 .buttons{
@@ -103,14 +97,15 @@ input::placeholder, textarea::placeholder {
 
 .logout {
   margin-left: 8px;
+  background-color: #FE1D1D
 }
-.editButton{
-  background-color: slateblue;
-  margin-right: 10px;
+.buttonEdit{
   border: none;
+  background-color: teal;
+  color: white;
+  cursor: pointer;
   padding: 5px;
   border-radius: 5px;
-  
 }
 .buttonDelete {
   border: none;
@@ -119,5 +114,26 @@ input::placeholder, textarea::placeholder {
   color: white;
   background-color: red;
   cursor: pointer;
-  margin-top: 10px;
+}
+
+.insideButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-right: 15px;
+  margin-left: 15px;
+  margin-top: 25px;
+}
+
+.place {
+  font-weight: normal;
+  margin-top: -2px;
+}
+
+.desc{
+  margin-top: -1px;
+}
+
+.stars{
+  margin-bottom: 5px;
 }
