@@ -94,7 +94,7 @@ class Homepage extends Component {
           </div>
           <div className="registerDiv">
             <h2 className="h2-register" >The place to store your favroite destinations.</h2>
-            <h3 className="h3-register">Rate it and Remember it forver.</h3>
+            <h3 className="h3-register">Rate it and Remember it forever.</h3>
             <h5 className="h4-register">Are you ready? Register to create your account.</h5>
             <button className="btn btn-secondary btn" onClick={this.showRegisterPopup}>
             Register
