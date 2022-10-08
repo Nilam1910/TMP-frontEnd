@@ -47,10 +47,10 @@ import {Navigate } from "react-router-dom"
       console.log("login popup closed")
       this.setState({
         showLogin: false,
-        
+
       })
     }
-  
+
     handleLogin = (e) => {
       e.preventDefault()
       console.log("eTarget", e.target.username.value, e.target.email.value, e.target.password.value)
@@ -68,15 +68,15 @@ import {Navigate } from "react-router-dom"
       }).then(res => {
         if (res.ok) return res.json()
         console.log(res)
-      }) 
+      })
         .then(resJson => {
         console.log("resJson", resJson)
         this.getPins()
       })
       this.setState({
        user: true
-       
-  
+
+
       })
     }
 
@@ -96,7 +96,7 @@ import {Navigate } from "react-router-dom"
               <input id="username" name="username" className="username" type="text" placeholder="username" />
             <label className="label1" htmlFor="name">Email: </label>
               <input id="email" name="email" className="email" type="email" placeholder="email" />
-            <label className="password" htmlFor="name">Password: </label>
+            <label className="label1" htmlFor="name">Password: </label>
               <input id="password" name="password" className="password" type="password" placeholder="password" />
               <input className="loginButton" type="submit" value="Login" />
           </form>

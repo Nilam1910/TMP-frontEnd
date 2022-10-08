@@ -103,7 +103,7 @@ class Register extends Component {
         </form>
 
         <BiXCircle
-            className="loginCancel"
+            className="registerCancel"
             onClick={this.props.closeRegisterPopup}
 
           />
