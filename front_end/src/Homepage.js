@@ -4,6 +4,7 @@ import "./components/login.css"
 import Register from './components/Register'
 import Login from "./components/Login"
 import {BiXCircle } from "react-icons/bi";
+import './homePage.css';
 
 
 
@@ -87,8 +88,18 @@ class Homepage extends Component {
   render() {
     return (
       <div>
-        <h1> Welcome To Travel Pins</h1>
-        <Link to ="/map"> Map </Link>
+          <img className="bg-image" src="https://images.pexels.com/photos/227433/pexels-photo-227433.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" />
+          <div className="header-title1">
+            <h1> Welcome To Travel Pins</h1>
+          </div>
+          <div className="registerDiv">
+            <h2 className="h2-register" >The place to store your favroite destinations.</h2>
+            <h3 className="h3-register">Rate it and Remember it forver.</h3>
+            <h5 className="h4-register">Are you ready? Register to create your account.</h5>
+            <button className="btn btn-secondary btn" onClick={this.showRegisterPopup}>
+            Register
+            </button>
+          </div>
 
       {/* {this.state.showLogin && (
         <Login
@@ -123,11 +134,8 @@ class Homepage extends Component {
 
 
 
-      <button className="button register" onClick={this.showRegisterPopup}>
-      Register
-      </button>
 
-      <button className="button register" onClick={this.showLoginPopup}>
+      <button className="btn btn-primary" onClick={this.showLoginPopup}>
       Login
       </button>
 
