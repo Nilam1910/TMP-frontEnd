@@ -23,7 +23,6 @@ class Register extends Component {
       navigate: true,
       user: false,
       showRegister: true,
-      showLogin: false,
     }
   }
 
@@ -63,19 +62,6 @@ class Register extends Component {
       })
     })
   }
-  showRegisterPopup = () => {
-    console.log("register popup triggered")
-    this.setState({
-      showRegister: true
-    })
-  }
-
-  closeRegisterPopup = () => {
-    console.log("register popup closed")
-    this.setState({
-      showRegister: false
-    })
-  }
 
 
   showRegisterPopup = () => {
@@ -93,28 +79,6 @@ class Register extends Component {
   }
 
 
-
-
-
-
-
-  showRegisterPopup = () => {
-    console.log("register popup triggered")
-    this.setState({
-      showRegister: true,
-      showLogin: false
-    })
-  }
-
-  closeRegisterPopup = () => {
-    console.log("register popup closed")
-    this.setState({
-      showRegister: false,
-      showLogin: true
-    })
-  }
-
- 
 
 
 
@@ -137,13 +101,13 @@ class Register extends Component {
             <input id="password" name="password" className="password" type="password" placeholder="password" />
           <input className="registerButton" type="submit" value="Register" />
         </form>
-       
+
         <BiXCircle
             className="loginCancel"
             onClick={this.props.closeRegisterPopup}
 
           />
-       
+
       </div>
     )
   }
