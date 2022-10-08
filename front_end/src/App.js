@@ -4,6 +4,7 @@ import Map, {Marker, Popup} from 'react-map-gl';
 import Login from "./components/Login"
 import Register from "./components/Register"
 import { BiStar } from "react-icons/bi"
+import {Navigate } from "react-router-dom"
 
 
 
@@ -35,7 +36,8 @@ class App extends Component {
         currentLocation: null,
         showRegister: false,
         showEdit: false,
-        pinindex: null
+        pinindex: null,
+        redirect: false
 			}
 	}
   // componentDidMount - runs only once when the comp is mounted for the first time
@@ -172,6 +174,7 @@ class App extends Component {
         showLogout: true,
         setCurrentUser: false,
         showLogin: false,
+        redirect: true,
       })
     }
 
@@ -302,7 +305,9 @@ class App extends Component {
       >
         Add Pin
       </button>
+      {this.state.redirect && (<Navigate to ="/" />)}
       <button
+     
       className="button logout"
       onClick={this.handleLogOut}
       >
