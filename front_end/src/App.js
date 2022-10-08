@@ -310,13 +310,14 @@ class App extends Component {
       >
         Add Pin
       </button>
-      <button
-      className="button logout"
-      onClick={this.handleLogOut}
-      >
-      Log out
-      </button>
-      </div>
+    {this.state.redirect && (<Navigate to ="/" />)}
+     <button
+     className="button logout"
+     onClick={this.handleLogOut}
+     >
+     Log out
+     </button>
+     </div>
     {this.state.showForm && (
     <NewForm
     handleAddPin={this.handleAddPin}
