@@ -1,4 +1,3 @@
-
 import "./newform.css"
 import React, { Component } from 'react'
 import {  BiXCircle } from "react-icons/bi";
@@ -72,7 +71,7 @@ class NewForm extends Component {
               name="username"
               placeholder="Enter Username"
             />
-          <label className="label1" htmlFor="title"> Title: </label>
+          <label className="label" htmlFor="title"> Title: </label>
             <input
               className="username"
               type="text"
@@ -80,7 +79,7 @@ class NewForm extends Component {
               name="title"
               placeholder="enter location of the place"
           />
-          <label className="label1" htmlFor="description"> Description: </label>
+          <label className="label" htmlFor="description"> Description: </label>
             <input
               className="username"
               type="text"
@@ -88,21 +87,21 @@ class NewForm extends Component {
               name="description"
               placeholder="enter a description of your trip!"
             />
-          <label className="label1" htmlFor="rating"> Rating: </label>
+          <label className="label" htmlFor="rating"> Rating: </label>
             <input
             className="username"
             id="rating"
             name="rating"
             placeholder="enter your rating "
             />
-          <label className="label1" htmlFor="longitude"> Longitude: </label>
+          <label className="label" htmlFor="longitude"> Longitude: </label>
             <input
               className="username"
               id="longitude"
               name="longitude"
               placeholder="enter the longitude"
             />
-          <label className="label1" htmlFor="latitude"> Latitude: </label>
+          <label className="label" htmlFor="latitude"> Latitude: </label>
             <input
               className="username"
               id="latitude"

@@ -55,6 +55,9 @@ class EditPin extends Component {
     {console.log(this.props.pinindex)}
     return (
       <div className="formContainer">
+      <div className="logo">
+        Travel Pins
+      </div>
       <h1 className="h1-register">Edit PIN</h1>
         <form onSubmit={(e)=>{this.handleSubmit(e, this.props.pinindex)}}>
           <label className="label1" htmlFor="title"> Title: </label>
@@ -95,7 +98,7 @@ class EditPin extends Component {
               name="latitude"
               placeholder="enter the latitude"
           />
-            <input type="submit" value="Edit Pin" />
+            <input className="edit" type="submit" value="Edit Pin" />
             <BiXCircle
             className="registerCancel"
             onClick={this.props.closeEditPopup}

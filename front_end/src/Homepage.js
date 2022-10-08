@@ -34,7 +34,7 @@ class Homepage extends Component {
           zoom: 4
         },
         showPopup: false,
-        showLogin: true,
+        showLogin: false,
         setCurrentUser: null ,
         showLogout: false,
         currentLocation: null,
@@ -63,8 +63,8 @@ class Homepage extends Component {
     this.setState({
       showLogin: false,
 
-    
-    
+
+
     })
   }
 
@@ -89,7 +89,7 @@ class Homepage extends Component {
       <div>
         <h1> Welcome To Travel Pins</h1>
         <Link to ="/map"> Map </Link>
-      
+
       {/* {this.state.showLogin && (
         <Login
         getPins={this.getPins}
@@ -117,24 +117,24 @@ class Homepage extends Component {
         handleLogin={this.props.handleLogin}
         handleLogOut={this.props.handleLogOut}
         showLoginPopup={this.props.showLoginPopup}
-        
+
         />
       )}
 
 
-    
+
       <button className="button register" onClick={this.showRegisterPopup}>
       Register
       </button>
-    
+
       <button className="button register" onClick={this.showLoginPopup}>
       Login
       </button>
 
       </div>
-     
-      
-      
+
+
+
     )
   }
 }
