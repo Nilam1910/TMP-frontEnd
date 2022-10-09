@@ -1,8 +1,6 @@
 import './App.css';
 import React, { Component} from 'react'
 import Map, {Marker, Popup} from 'react-map-gl';
-import Login from "./components/Login"
-import Register from "./components/Register"
 import NewForm from "./components/NewForm"
 import EditPin from "./components/EditPin"
 import { BiStar } from "react-icons/bi";
@@ -38,7 +36,7 @@ class App extends Component {
         currentLocation: null,
         showRegister: false,
         showEdit: false,
-        pinindex: null,
+        pinIndex: null,
         redirect: false
 			}
 	}
@@ -223,7 +221,7 @@ class App extends Component {
     console.log(index)
     this.setState({
       showEdit: true,
-      pinindex: index,
+      pinIndex: index,
     })
   }
 
@@ -231,7 +229,7 @@ class App extends Component {
     console.log("form popup closed")
     this.setState({
       showEdit: false,
-      pinindex: null
+      pinIndex: null
     })
   }
 
@@ -304,38 +302,40 @@ class App extends Component {
         )
       })}
       <div className="buttons">
-      <button
-      className="button addPin"
-      onClick={this.showFormPopup}
-      >
-        Add Pin
-      </button>
-    {this.state.redirect && (<Navigate to ="/" />)}
-     <button
-     className="button logout"
-     onClick={this.handleLogOut}
-     >
-     Log out
-     </button>
-     </div>
-    {this.state.showForm && (
-    <NewForm
-    handleAddPin={this.handleAddPin}
-    closeFormPopup={this.closeFormPopup}
-      />
-    )}
-    {this.state.showEdit && (
-    <EditPin
-    pinindex={this.state.pinindex}
-    pins={this.state.pins}
-    editPin={this.state.editPin}
-    handleEdit={this.handleEdit}
-    closeEditPopup={this.closeEditPopup}
-      />
-    )}
-      </Map>
-    </div>
-    );
+          <button
+            className="button addPin"
+            onClick={this.showFormPopup}// from NewFrom.js
+            >
+              Add Pin
+            </button>
+          {this.state.redirect && (<Navigate to ="/" />)}
+          <button
+          className="button logout"
+          onClick={this.handleLogOut}
+          >
+          Log out
+          </button>
+      </div>
+          
+        {this.state.showForm && (
+          <NewForm
+            handleAddPin={this.handleAddPin} // from NewFrom.js
+            closeFormPopup={this.closeFormPopup} 
+          />
+        )}
+
+        {this.state.showEdit && (
+            <EditPin
+            pinIndex={this.state.pinIndex}
+            pins={this.state.pins}
+            editPin={this.state.editPin}
+            handleEdit={this.handleEdit}
+            closeEditPopup={this.closeEditPopup}
+            />
+        )}
+          </Map>
+        </div>
+        );
   }
 }
 

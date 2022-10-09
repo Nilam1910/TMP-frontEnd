@@ -1,22 +1,23 @@
 import React, { Component } from 'react'
-import {Router, Link , Navigate, } from "react-router-dom"
 import "./components/login.css"
 import Register from './components/Register'
 import Login from "./components/Login"
-import {BiXCircle } from "react-icons/bi";
+// import {BiXCircle } from "react-icons/bi";
 import './homePage.css';
+import ContactForm from './components/ContactForm';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 
 
 
 
-  let baseURL = ""
+    let baseURL = ""
 
-  if(process.env.NODE_ENV === "development"){
-    baseURL = "http://localhost:3001"
-  } else {
-    baseURL = `${process.env.REACT_APP_BACKEND_URL}/pins`
-  }
-  console.log("Current base URL: ", baseURL)
+    if(process.env.NODE_ENV === "development"){
+      baseURL = "http://localhost:3001"
+    } else {
+      baseURL = `${process.env.REACT_APP_BACKEND_URL}/pins`
+    }
+    console.log("Current base URL: ", baseURL)
 
 
 
@@ -41,6 +42,7 @@ class Homepage extends Component {
         currentLocation: null,
         showRegister: false,
         showEdit: false
+        
 			}
 	}
 
@@ -63,9 +65,6 @@ class Homepage extends Component {
     console.log("login popup closed")
     this.setState({
       showLogin: false,
-
-
-
     })
   }
 
@@ -77,50 +76,47 @@ class Homepage extends Component {
     })
   }
 
-  closeRegisterPopup = () => {
-    console.log("register popup closed")
+  showContactFormPopup = () => {
+    console.log("contactForm popup working")
     this.setState({
-      showRegister: false
+      showContactForm: true
+      
     })
   }
+
 
 
   render() {
     return (
       <div>
-          <img className="bg-image" src="https://images.pexels.com/photos/227433/pexels-photo-227433.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" />
+        <div>
+        <>
+          <img className="bg-image" src="https://images.pexels.com/photos/227433/pexels-photo-227433.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt= ""/>
+        </>
           <div className="header-title1">
             <h1> Welcome To Travel Pins</h1>
           </div>
           <div className="registerDiv">
-            <h2 className="h2-register" >The place to store your favroite destinations.</h2>
+            <h2 className="h2-register" >The place to store your favorite destinations.</h2>
             <h3 className="h3-register">Rate it and Remember it forever.</h3>
             <h5 className="h4-register">Are you ready? Register to create your account.</h5>
             <button className="btn btn-secondary btn" onClick={this.showRegisterPopup}>
             Register
             </button>
           </div>
+        </div>
 
-      {/* {this.state.showLogin && (
-        <Login
-        getPins={this.getPins}
-        handleLogin={this.handleLogin}
+        
+
+        {this.state.showRegister
+        && (
+        <Register
+        getPins={this.props.getPins}
+        handleRegister={this.props.handleRegister}
+        closeRegisterPopup={this.closeRegisterPopup}
+        showRegisterPopup={this.props.showRegisterPopup}
         />
-        )} */}
-
-
-
-
-      {this.state.showRegister
-       && (
-      <Register
-      getPins={this.props.getPins}
-      handleRegister={this.props.handleRegister}
-      closeRegisterPopup={this.closeRegisterPopup}
-      showRegisterPopup={this.props.showRegisterPopup}
-
-     />
-     )}
+      )}
       {this.state.showLogin && (
         <Login
         closeLoginPopup={this.closeLoginPopup}
@@ -128,21 +124,25 @@ class Homepage extends Component {
         handleLogin={this.props.handleLogin}
         handleLogOut={this.props.handleLogOut}
         showLoginPopup={this.props.showLoginPopup}
-
         />
       )}
-
-
-
-
-      <button className="btn btn-primary" onClick={this.showLoginPopup}>
-      Login
-      </button>
-
+        <button className="btn btn-primary" onClick={this.showLoginPopup}>
+          Login
+        </button>
+        
+        {this.state.showContactForm && (
+          <ContactForm 
+          // handleContactForm={this.handleContactForm} // from ContactForm
+          // closeContactFormPopup={this.closeContactFormPopup}
+          // showContactFormPopup={this.props.showContactFormPopup}
+          // getPins={this.props.getPins}
+          
+          />
+        )}
+          <div>
+          <button className="btn btn-danger"  onClick={this.showContactFormPopup}>Contact</button>
+          </div>
       </div>
-
-
-
     )
   }
 }

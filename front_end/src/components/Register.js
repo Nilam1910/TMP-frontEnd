@@ -101,13 +101,10 @@ class Register extends Component {
             <input id="password" name="password" className="password" type="password" placeholder="password" />
           <input className="registerButton" type="submit" value="Register" />
         </form>
-
-        <BiXCircle
+          <BiXCircle
             className="registerCancel"
             onClick={this.props.closeRegisterPopup}
-
           />
-
       </div>
     )
   }

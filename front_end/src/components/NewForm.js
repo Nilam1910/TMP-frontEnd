@@ -1,4 +1,4 @@
-import "./newform.css"
+import "./newForm.css"
 import React, { Component } from 'react'
 import {  BiXCircle } from "react-icons/bi";
 
@@ -44,16 +44,11 @@ class NewForm extends Component {
         })
         .then (resJson => {
           console.log("NewForm - resJson", resJson)
-          this.props.handleAddPin(resJson)
-          // this.props.handleEditPin(resJson)
+          this.props.handleAddPin(resJson) // in app.js
+          
         })
       }
-      // closeLoginPopup = () => {
-      //   console.log("login popup closed")
-      //   this.setState({
-      //     showLogin: false
-      //   })
-      // }
+     
   render() {
     return (
       <div className="formContainer">

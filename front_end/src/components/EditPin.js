@@ -14,11 +14,11 @@ class EditPin extends Component {
    constructor(props) {
      super(props)
      this.state = {
-       title: this.props.pins[this.props.pinindex].title,
-       description: this.props.pins[this.props.pinindex].description,
-       rating: this.props.pins[this.props.pinindex].rating,
-       longitude: this.props.pins[this.props.pinindex].longitude,
-       latitude:this.props.pins[this.props.pinindex].latitude
+       title: this.props.pins[this.props.pinIndex].title,
+       description: this.props.pins[this.props.pinIndex].description,
+       rating: this.props.pins[this.props.pinIndex].rating,
+       longitude: this.props.pins[this.props.pinIndex].longitude,
+       latitude:this.props.pins[this.props.pinIndex].latitude
      }
    }
 
@@ -52,14 +52,14 @@ class EditPin extends Component {
     }
 
   render() {
-    {console.log(this.props.pinindex)}
+    // {console.log(this.props.pinIndex)}
     return (
       <div className="formContainer">
       <div className="logo">
         Travel Pins
       </div>
       <h1 className="h1-register">Edit PIN</h1>
-        <form onSubmit={(e)=>{this.handleSubmit(e, this.props.pinindex)}}>
+        <form onSubmit={(e)=>{this.handleSubmit(e, this.props.pinIndex)}}>
           <label className="label1" htmlFor="title"> Title: </label>
             <input
               className="username"
