@@ -27,8 +27,6 @@ import {Navigate } from "react-router-dom"
       }
     }
 
-
-
   getPins = () => {
 		fetch(baseURL + '/pins')
 			.then(res => {
@@ -75,8 +73,6 @@ import {Navigate } from "react-router-dom"
       })
       this.setState({
        user: true
-
-
       })
     }
 

@@ -1,4 +1,4 @@
-import "./newForm.css"
+import "./newform.css"
 import React, { Component } from 'react'
 import {  BiXCircle } from "react-icons/bi";
 

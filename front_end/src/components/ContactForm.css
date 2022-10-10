@@ -1,60 +1,61 @@
-/* .registerContainer {
-   width: 400px;
-   height: 450px;
-   padding: 20px;
-   border: 1px solid white;
-   border-radius: 10px;
-   background-color: rgba(1, 0, 0, 1);
-   position: absolute;
-   top: 0;
-   bottom: 0;
-   left: 0;
-   right: 0;
-   margin: auto;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: space-around;
- }
-
- .logo {
-   font-size: 30px;
-   color: #30C6D3;
-   align-items: center;
-   font-weight: 700px;
-   margin-top: -70px;
-   margin-bottom: -140px;
- }
-
- .h1-register {
-   font-size: 20px;
-   font-weight: 800;
-   margin-top: 0;
-   line-height: 1.2;
-   color: white;
- }
-
- .username {
-   margin-bottom: 5px;
- }
-
- .label {
-   color: white;
-   text-decoration: none;
- }
-
- .registerButton{
-   margin-top: 25px;
-   font-size:large;
-   border-radius: 10px;
-   background-color: #30C6D3;
-   color: white;
- }
-
- .registerCancel {
-   color: white;
-   position: absolute;
-   top: 5px;
-   right: 5px;
-   cursor: pointer;
- } */
+.contactFormContainer {
+  width: 400px;
+  height: 450px;
+  padding: 20px;
+  border: 1px solid white;
+  border-radius: 10px;
+  background-color: rgba(1, 0, 0, 1);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  }
+  
+  .logo-c {
+  font-size: 30px;
+  color: #30C6D3;
+  align-items: center;
+  font-weight: 700px;
+  margin-top: -70px;
+  margin-bottom: -140px;
+  }
+  
+  .h-contactForm {
+  font-size: 20px;
+  font-weight: 800;
+  margin-top: 70px;
+  line-height: 1.2;
+  color: white;
+  }
+  
+  .username {
+  margin-bottom: 5px;
+  }
+  
+  .label1 {
+  color: white;
+  text-decoration: none;
+  }
+  
+  .contactFormButton{
+  margin-top: 25px;
+  margin-right: 50px;
+  font-size:large;
+  border-radius: 10px;
+  background-color: #30C6D3;
+  color: white;
+  }
+  
+  .contactFormCancel {
+  color: white;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+  }
