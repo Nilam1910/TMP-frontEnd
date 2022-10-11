@@ -56,8 +56,8 @@ class NewForm extends Component {
           Travel Pins
         </div>
           <p className="h1-register">CREATE A PIN</p>
+        <div className="form">
         <form onSubmit={this.handleSubmit}>
-
           <label className="label" htmlFor="username"> UserName: </label>
             <input
               className="username"
@@ -103,8 +103,9 @@ class NewForm extends Component {
               name="latitude"
               placeholder="enter the latitude"
             />
-            <input class ="create" type="submit" value="Create a Pin" />
+            <input className ="create" type="submit" value="Create a Pin" />
           </form>
+          </div>
               <BiXCircle
                 className="loginCancel"
                 onClick={this.props.closeFormPopup}

@@ -23,14 +23,18 @@
   color: white;
   text-decoration: none;
 }
-
+.form{
+  margin-top: -20px;
+}
 
 .create{
-  margin-top: 25px;
+  margin-top: 5px;
   font-size:large;
   border-radius: 10px;
   background-color: #30C6D3;
   color: white;
+  border: .5px solid white;
+  box-shadow: 0 4px rgb(110, 112, 112), 0 3px rgba(0,0,0,0.5);
 }
 
 .loginCancel {

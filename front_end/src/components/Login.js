@@ -91,9 +91,9 @@ import {Navigate } from "react-router-dom"
             <label className="label1" htmlFor="name">Username: </label>
               <input id="username" name="username" className="username" type="text" placeholder="username" />
             <label className="label1" htmlFor="name">Email: </label>
-              <input id="email" name="email" className="email" type="email" placeholder="email" />
+              <input id="email" name="email" className="username" type="email" placeholder="email" />
             <label className="label1" htmlFor="name">Password: </label>
-              <input id="password" name="password" className="password" type="password" placeholder="password" />
+              <input id="password" name="password" className="username" type="password" placeholder="password" />
               <input className="loginButton" type="submit" value="Login" />
           </form>
             <BiXCircle

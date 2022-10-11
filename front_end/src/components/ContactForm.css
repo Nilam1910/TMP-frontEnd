@@ -1,61 +1,76 @@
 .contactFormContainer {
-  width: 400px;
-  height: 450px;
-  padding: 20px;
-  border: 1px solid white;
-  border-radius: 10px;
-  background-color: rgba(1, 0, 0, 1);
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
+    width: 400px;
+    height: 450px;
+    padding: 20px;
+    border: 1px solid white;
+    border-radius: 10px;
+    background-color: rgba(1, 0, 0, 1);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: 2px red;
   }
   
   .logo-c {
-  font-size: 30px;
-  color: #30C6D3;
-  align-items: center;
-  font-weight: 700px;
-  margin-top: -70px;
-  margin-bottom: -140px;
+    font-size: 30px;
+    color: #30C6D3;
+    align-items: center;
+    font-weight: 700px;
+    margin-top: -30px;
+    margin-bottom: -140px;
   }
   
   .h-contactForm {
-  font-size: 20px;
-  font-weight: 800;
-  margin-top: 70px;
-  line-height: 1.2;
-  color: white;
+    font-size: 30px;
+    font-weight: 800;
+    margin-top: 70px;
+    margin-bottom: -30px;
+    line-height: 5px;
+    color: white;
+    align-items: center;
   }
   
   .username {
-  margin-bottom: 5px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    line-height: 10px;
+    height: 20px;
   }
-  
-  .label1 {
-  color: white;
-  text-decoration: none;
+  .message{
+    margin-bottom: 10px;
+    line-height: 10px;
+    border-radius: 10px;
+    height: 30px;
+  }
+  .label1, .lab-mess {
+    color: white;
+    text-decoration: none;
   }
   
   .contactFormButton{
-  margin-top: 25px;
-  margin-right: 50px;
-  font-size:large;
-  border-radius: 10px;
-  background-color: #30C6D3;
-  color: white;
+    margin-top: 35px;
+    margin-right: 5px;
+    font-size:large;
+    border-radius: 10px;
+    background-color: #30C6D3;
+    color: white;
+    align-items: center;
+    height: 40px;
+    border: .5px solid white;
+    box-shadow: 0 4px rgb(110, 112, 112), 0 3px rgba(0,0,0,0.5);
   }
   
   .contactFormCancel {
-  color: white;
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  cursor: pointer;
+    color: white;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
   }

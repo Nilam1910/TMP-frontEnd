@@ -46,6 +46,8 @@ body {
   position:absolute;
   top:0;
   right:0;
+  border: .5px solid white;
+  box-shadow: 0 4px rgb(110, 112, 112), 0 3px rgba(0,0,0,0.5);
 }
 
 .btn-primary:hover {
@@ -56,12 +58,15 @@ body {
 .btn-secondary {
   color: white;
   background-color: #ED553B;
-  width: 30%
+  width: 30%;
+  border: .1px solid white;
+  box-shadow: 0 7px rgb(110, 112, 112), 0 3px rgba(0,0,0,0.5);
 }
 
 .btn-secondary:hover {
   color: #ED553B;
   background-color: white;
+  
 }
 
 .h2-register {
@@ -88,9 +93,12 @@ body {
 }
 
 .btn-danger{
-  
+  border: .5px solid white;
+  box-shadow: 0 4px rgb(110, 112, 112), 0 3px rgba(0,0,0,0.5);
+  color: white;
+  background-color: teal;
   float: right;
-  margin-right: 20px;
+  margin-right: 30px;
   position:absolute;
   top:0;
   right:80px;

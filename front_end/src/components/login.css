@@ -34,6 +34,7 @@
 
  .username {
    margin-bottom: 5px;
+   height: 20px;
  }
 
  .label1 {
@@ -47,6 +48,9 @@
    border-radius: 10px;
    background-color: #30C6D3;
    color: white;
+   height: 30px;
+   border: .5px solid white;
+   box-shadow: 0 4px rgb(110, 112, 112), 0 3px rgba(0,0,0,0.5);
  }
 
  .loginCancel {
