@@ -17,7 +17,7 @@ class ContactForm extends Component {
       super(props)
       this.state = {
         success:false,
-        setSuccess:false,
+        setSuccess:true,
         error: false,
         setError: false,
         navigate: true,

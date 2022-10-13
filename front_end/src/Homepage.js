@@ -128,6 +128,7 @@ class Homepage extends Component {
 
         {this.state.showContactForm && (
           <ContactForm
+          getPins={this.props.getPins}
           handleContactForm={this.handleContactForm} // from ContactForm
           closeContactFormPopup={this.closeContactFormPopup}
           showContactFormPopup={this.props.showContactFormPopup}

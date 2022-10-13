@@ -57,7 +57,7 @@ body {
 
 .btn-secondary {
   color: white;
-  background-color: #ED553B;
+  background-color: teal;
   width: 30%;
   border: .1px solid white;
   box-shadow: 0 7px rgb(110, 112, 112), 0 3px rgba(0,0,0,0.5);
@@ -102,4 +102,9 @@ body {
   position:absolute;
   top:0;
   right:80px;
+}
+
+.btn-danger:hover {
+  color: teal;
+  background-color: white;
 }

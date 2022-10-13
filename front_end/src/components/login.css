@@ -52,7 +52,10 @@
    border: .5px solid white;
    box-shadow: 0 4px rgb(110, 112, 112), 0 3px rgba(0,0,0,0.5);
  }
-
+ .loginButton:hover {
+  color: teal;
+  background-color: white;
+}
  .loginCancel {
    color: white;
    position: absolute;
